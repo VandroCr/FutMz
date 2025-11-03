@@ -1,0 +1,45 @@
+═══════════════════════════════════════════════════════════════
+       🚀 COMO EXECUTAR O DEPLOY AGORA
+═══════════════════════════════════════════════════════════════
+
+EXECUTE o arquivo: EXECUTAR_DEPLOY.bat
+
+Ou execute estes comandos MANUALMENTE no CMD (não PowerShell):
+
+1. Abra o CMD (Prompt de Comando)
+2. Navegue até a pasta do projeto:
+   cd "C:\Users\vandr\OneDrive\Área de Trabalho\Revista"
+
+3. Execute os comandos Git:
+   git add backend/main.py EXECUTAR_DEPLOY.bat ARTIGOS_FUNCIONAM_SEM_FOTOS.txt
+   git commit -m "Fix: Artigos sem imagens para funcionar no Render"
+   git push
+
+4. Aguarde ~5 minutos para o Render fazer deploy
+
+5. Depois, acesse:
+   https://futmz.onrender.com/docs
+   
+   → Procure "POST /api/setup"
+   → Clique em "Try it out"
+   → Clique em "Execute"
+   
+   Isso vai criar o admin E os 3 artigos!
+
+6. Verifique se funcionou:
+   https://futmz.onrender.com/api/articles
+   
+   Deve retornar 3 artigos (mesmo sem fotos)
+
+7. No celular, atualize o app (expo start)
+
+═══════════════════════════════════════════════════════════════
+              ⚠️  IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+- Os artigos vão aparecer SEM fotos (isso é normal!)
+- Depois você pode adicionar fotos pela interface web
+- O importante agora é OS ARTIGOS APARECEREM!
+
+═══════════════════════════════════════════════════════════════
+

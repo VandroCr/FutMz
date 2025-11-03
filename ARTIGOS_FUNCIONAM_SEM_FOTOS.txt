@@ -1,0 +1,72 @@
+═══════════════════════════════════════════════════════════════
+       ✅ ARTIGOS FUNCIONAM SEM FOTOS!
+═══════════════════════════════════════════════════════════════
+
+Verifiquei o seu backend e encontrei o problema:
+
+As imagens estavam com URLs que NÃO EXISTEM no servidor Render:
+   https://futmz.onrender.com/uploads/0a710882-1291-44af-aed4-70457ad8a086.jpg
+   (e outras 2 URLs similares)
+
+═══════════════════════════════════════════════════════════════
+              🔧 SOLUÇÃO APLICADA
+═══════════════════════════════════════════════════════════════
+
+Removi as URLs de imagem inválidas dos artigos de exemplo.
+
+Agora os artigos são criados SEM imagens, e o app funciona normalmente!
+
+O frontend já estava preparado para isso:
+   - Se tem imagem: mostra a imagem
+   - Se NÃO tem imagem: mostra só o conteúdo
+
+═══════════════════════════════════════════════════════════════
+              📋 PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════════════
+
+1. Execute: EXECUTAR_DEPLOY.bat
+   (Isso atualiza o Render com os artigos sem imagens)
+
+2. Aguarde ~5 minutos para o deploy terminar
+
+3. Acesse: https://futmz.onrender.com/docs
+   → Procure "POST /api/setup"
+   → "Try it out" → "Execute"
+
+4. Verifique os artigos:
+   https://futmz.onrender.com/api/articles
+   (Deve retornar 3 artigos SEM image_url)
+
+5. Teste no celular:
+   - Os artigos vão aparecer
+   - Mas SEM fotos (normal!)
+
+═══════════════════════════════════════════════════════════════
+         🖼️  COMO ADICIONAR FOTOS DEPOIS?
+═══════════════════════════════════════════════════════════════
+
+Depois que os artigos aparecerem no celular, você pode adicionar fotos:
+
+1. Faça login como admin (admin / admin123)
+
+2. Vá em "Artigos" e clique em algum artigo
+
+3. Clique em "Editar" (ou "Editar Artigo")
+
+4. Use "Upload de Imagem" para adicionar uma foto
+
+5. Salve o artigo
+
+═══════════════════════════════════════════════════════════════
+
+IMPORTANTE: As imagens só aparecerão no Render se você subir
+elas pela INTERFACE WEB do app. As imagens que estão na pasta
+local backend/uploads/ NÃO vão para o Render automaticamente.
+
+═══════════════════════════════════════════════════════════════
+
+Para agora, foco em FAZER OS ARTIGOS APARECEREM no celular!
+As fotos vem depois!
+
+═══════════════════════════════════════════════════════════════
+

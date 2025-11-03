@@ -14,13 +14,13 @@ ENV.bak/
 venv.bak/
 *.db
 
-# Uploads/Arquivos temporários
-backend/uploads/*.jpg
-backend/uploads/*.png
-backend/uploads/*.mp4
-backend/uploads/*.mov
-backend/uploads/*.avi
-backend/uploads/*.jpeg
+# Uploads/Arquivos temporários - REMOVIDO para permitir imagens no Render
+# backend/uploads/*.jpg
+# backend/uploads/*.png
+# backend/uploads/*.mp4
+# backend/uploads/*.mov
+# backend/uploads/*.avi
+# backend/uploads/*.jpeg
 
 # Configurações do IDE
 .vscode/

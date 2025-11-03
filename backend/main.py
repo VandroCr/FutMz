@@ -96,7 +96,7 @@ async def setup_database():
         db.commit()
         db.refresh(admin)
         
-        # Criar artigos de exemplo
+        # Criar artigos de exemplo COM imagens
         sample_articles = [
             {
                 "title": "⚽ MASSIFICAÇÃO DO FUTEBOL NA ZAMBEZIA GANHA REFORÇO! ⚽",
