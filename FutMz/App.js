@@ -11,13 +11,20 @@ import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [screen, setScreen] = useState('login'); // 'home', 'login', 'register', 'admin', 'edit', 'article'
+  const [screen, setScreen] = useState('login'); // 'home', 'login', 'register', 'admin', 'edit', 'article', 'teams'
   const [articles, setArticles] = useState([]);
   const [featuredArticles, setFeaturedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [authToken, setAuthToken] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  
+  // Teams state
+  const [teams, setTeams] = useState([]);
+  const [editingTeam, setEditingTeam] = useState(null);
+  const [newTeamName, setNewTeamName] = useState('');
+  const [selectedTeamLogo, setSelectedTeamLogo] = useState(null);
+  const [editSelectedTeamLogo, setEditSelectedTeamLogo] = useState(null);
   
   // Login state
   const [username, setUsername] = useState('');
@@ -64,6 +71,7 @@ export default function App() {
     if (screen === 'home') {
       loadArticles();
       loadFeaturedArticles();
+      loadTeams();
     }
     checkAuth();
   }, [screen]);
@@ -242,6 +250,32 @@ export default function App() {
     }
   };
 
+  const pickTeamLogo = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      setSelectedTeamLogo(result.assets[0].uri);
+    }
+  };
+
+  const pickEditTeamLogo = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      setEditSelectedTeamLogo(result.assets[0].uri);
+    }
+  };
+
   const pickEditImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -399,6 +433,18 @@ export default function App() {
       }
     } catch (error) {
       console.error('Erro ao carregar artigos em destaque:', error);
+    }
+  };
+
+  const loadTeams = async () => {
+    try {
+      const response = await fetch(`${API_URL}/teams/`);
+      if (response.ok) {
+        const data = await response.json();
+        setTeams(data);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar equipas:', error);
     }
   };
 
@@ -734,6 +780,138 @@ export default function App() {
     } catch (error) {
       Alert.alert('Erro', 'Erro ao conectar ao servidor');
     }
+  };
+
+  // Team CRUD Functions
+  const handleCreateTeam = async () => {
+    if (!newTeamName.trim()) {
+      Alert.alert('Erro', 'Digite o nome da equipa');
+      return;
+    }
+
+    if (!authToken) {
+      Alert.alert('Erro', 'Você precisa estar logado');
+      return;
+    }
+
+    try {
+      let logoUrl = null;
+      
+      if (selectedTeamLogo) {
+        try {
+          logoUrl = await uploadImageToServer(selectedTeamLogo);
+        } catch (uploadError) {
+          Alert.alert('Erro', 'Erro ao fazer upload do logotipo');
+          return;
+        }
+      }
+
+      const response = await fetch(`${API_URL}/teams/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+          name: newTeamName,
+          logo_url: logoUrl,
+        }),
+      });
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Equipa criada com sucesso!');
+        setNewTeamName('');
+        setSelectedTeamLogo(null);
+        loadTeams();
+        setScreen('home');
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Erro', errorData.detail || 'Erro ao criar equipa');
+      }
+    } catch (error) {
+      console.error('Erro ao criar equipa:', error);
+      Alert.alert('Erro', 'Erro ao conectar ao servidor');
+    }
+  };
+
+  const handleUpdateTeam = async (team) => {
+    try {
+      let logoUrl = team.logo_url;
+      
+      if (editSelectedTeamLogo) {
+        try {
+          logoUrl = await uploadImageToServer(editSelectedTeamLogo);
+        } catch (uploadError) {
+          Alert.alert('Erro', 'Erro ao fazer upload do logotipo');
+          return;
+        }
+      }
+
+      const response = await fetch(`${API_URL}/teams/${team.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+          name: editingTeam.name,
+          logo_url: logoUrl,
+        }),
+      });
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Equipa atualizada com sucesso!');
+        setEditingTeam(null);
+        setEditSelectedTeamLogo(null);
+        loadTeams();
+        setScreen('home');
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Erro', errorData.detail || 'Erro ao atualizar equipa');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar equipa:', error);
+      Alert.alert('Erro', 'Erro ao conectar ao servidor');
+    }
+  };
+
+  const handleDeleteTeam = async (teamId) => {
+    Alert.alert(
+      'Confirmar exclusão',
+      'Tem certeza que deseja excluir esta equipa?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const response = await fetch(`${API_URL}/teams/${teamId}`, {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': `Bearer ${authToken}`
+                }
+              });
+
+              if (response.ok) {
+                Alert.alert('Sucesso', 'Equipa excluída com sucesso!');
+                loadTeams();
+              } else {
+                Alert.alert('Erro', 'Erro ao excluir equipa');
+              }
+            } catch (error) {
+              Alert.alert('Erro', 'Erro ao conectar ao servidor');
+            }
+          }
+        }
+      ]
+    );
+  };
+
+  const startEditTeam = (team) => {
+    setEditingTeam(team);
+    setEditSelectedTeamLogo(null);
+    setScreen('teams');
   };
 
   const renderArticleContent = (content, contentImages = []) => {
@@ -1123,6 +1301,174 @@ export default function App() {
               </TouchableOpacity>
             </View>
           </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  // Render Teams Screen
+  if (screen === 'teams') {
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <ScrollView style={styles.adminScroll}>
+          <View style={styles.adminHeader}>
+            <TouchableOpacity onPress={() => { setScreen('home'); setEditingTeam(null); }} style={styles.backButton}>
+              <Ionicons name="arrow-back" size={24} color="#fff" />
+            </TouchableOpacity>
+            <Text style={styles.adminTitle}>{editingTeam ? 'Editar Equipa' : 'Gerenciar Equipas'}</Text>
+            <View style={{ width: 24 }} />
+          </View>
+
+          {editingTeam ? (
+            // Editar equipa
+            <View style={styles.form}>
+              <View style={styles.formSection}>
+                <Text style={styles.label}>Nome da Equipa *</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Ex: UD Songo"
+                  placeholderTextColor="#999"
+                  value={editingTeam.name}
+                  onChangeText={(text) => setEditingTeam({ ...editingTeam, name: text })}
+                />
+              </View>
+
+              <View style={styles.formSection}>
+                <Text style={styles.label}>Logotipo</Text>
+                <TouchableOpacity 
+                  style={styles.uploadButton}
+                  onPress={pickEditTeamLogo}
+                >
+                  <Ionicons name="image-outline" size={24} color="#228B22" />
+                  <Text style={styles.uploadButtonText}>
+                    {editSelectedTeamLogo || editingTeam.logo_url ? 'Logotipo Selecionado' : 'Escolher Logotipo'}
+                  </Text>
+                </TouchableOpacity>
+                {(editSelectedTeamLogo || editingTeam.logo_url) && (
+                  <View style={styles.logoPreview}>
+                    <Image 
+                      source={{ uri: editSelectedTeamLogo || editingTeam.logo_url }} 
+                      style={styles.logoPreviewImage}
+                      resizeMode="contain"
+                    />
+                    <TouchableOpacity 
+                      style={styles.removeLogoButton}
+                      onPress={() => {
+                        setEditSelectedTeamLogo(null);
+                        setEditingTeam({ ...editingTeam, logo_url: null });
+                      }}
+                    >
+                      <Ionicons name="close-circle" size={24} color="#fff" />
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </View>
+
+              <View style={styles.formSection}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => handleUpdateTeam(editingTeam)}
+                >
+                  <Text style={styles.buttonText}>Atualizar Equipa</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.button, styles.buttonSecondary]}
+                  onPress={() => { setEditingTeam(null); setEditSelectedTeamLogo(null); }}
+                >
+                  <Text style={styles.buttonSecondaryText}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            // Lista de equipas
+            <View style={styles.form}>
+              <View style={styles.formSection}>
+                <Text style={styles.label}>Criar Nova Equipa</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Ex: UD Songo"
+                  placeholderTextColor="#999"
+                  value={newTeamName}
+                  onChangeText={setNewTeamName}
+                />
+              </View>
+
+              <View style={styles.formSection}>
+                <Text style={styles.label}>Logotipo</Text>
+                <TouchableOpacity 
+                  style={styles.uploadButton}
+                  onPress={pickTeamLogo}
+                >
+                  <Ionicons name="image-outline" size={24} color="#228B22" />
+                  <Text style={styles.uploadButtonText}>
+                    {selectedTeamLogo ? 'Logotipo Selecionado' : 'Escolher Logotipo'}
+                  </Text>
+                </TouchableOpacity>
+                {selectedTeamLogo && (
+                  <View style={styles.logoPreview}>
+                    <Image 
+                      source={{ uri: selectedTeamLogo }} 
+                      style={styles.logoPreviewImage}
+                      resizeMode="contain"
+                    />
+                    <TouchableOpacity 
+                      style={styles.removeLogoButton}
+                      onPress={() => setSelectedTeamLogo(null)}
+                    >
+                      <Ionicons name="close-circle" size={24} color="#fff" />
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </View>
+
+              <View style={styles.formSection}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleCreateTeam}
+                >
+                  <Text style={styles.buttonText}>Criar Equipa</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.formSection}>
+                <Text style={styles.sectionTitle}>Equipas Cadastradas</Text>
+                {teams.length === 0 ? (
+                  <View style={styles.emptyContainer}>
+                    <Text style={styles.emptyText}>Nenhuma equipa cadastrada</Text>
+                  </View>
+                ) : (
+                  teams.map((team) => (
+                    <View key={team.id} style={styles.teamCard}>
+                      {team.logo_url ? (
+                        <Image source={{ uri: team.logo_url }} style={styles.teamLogo} />
+                      ) : (
+                        <View style={styles.teamLogoPlaceholder}>
+                          <Ionicons name="shirt-outline" size={32} color="#228B22" />
+                        </View>
+                      )}
+                      <Text style={styles.teamName}>{team.name}</Text>
+                      <View style={styles.teamActions}>
+                        <TouchableOpacity 
+                          style={styles.actionButton}
+                          onPress={() => startEditTeam(team)}
+                        >
+                          <Ionicons name="pencil" size={20} color="#228B22" />
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                          style={styles.actionButton}
+                          onPress={() => handleDeleteTeam(team.id)}
+                        >
+                          <Ionicons name="trash" size={20} color="#DC143C" />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  ))
+                )}
+              </View>
+            </View>
+          )}
         </ScrollView>
       </View>
     );
@@ -1518,6 +1864,11 @@ export default function App() {
             <TouchableOpacity style={styles.profileButton} onPress={() => setScreen('admin')}>
               <Ionicons name="create-outline" size={24} color="#228B22" />
               <Text style={styles.profileButtonText}>Criar Artigo</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.profileButton} onPress={() => setScreen('teams')}>
+              <Ionicons name="people-outline" size={24} color="#228B22" />
+              <Text style={styles.profileButtonText}>Gerenciar Equipas</Text>
             </TouchableOpacity>
             
             {authToken ? (
@@ -2449,5 +2800,60 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFD700',
     marginTop: 4,
+  },
+  // Team styles
+  logoPreview: {
+    marginTop: 10,
+    position: 'relative',
+    alignItems: 'center',
+  },
+  logoPreviewImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#f0f0f0',
+  },
+  removeLogoButton: {
+    position: 'absolute',
+    top: -5,
+    right: '40%',
+  },
+  teamCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 10,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  teamLogo: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  teamLogoPlaceholder: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  teamName: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1a1a1a',
+  },
+  teamActions: {
+    flexDirection: 'row',
+    gap: 10,
   },
 });
