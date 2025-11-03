@@ -1706,12 +1706,18 @@ export default function App() {
   const renderIdeasScreen = () => {
     // Dados das partidas
     const partidas = [
-      { rodada: 16, data: '05.11', hora: '15:00', time1: 'UD Songo', time2: 'Ferroviário Maputo', placar1: '-', placar2: '-' },
-      { rodada: 10, data: '06.11', hora: '15:00', time1: 'Black Bulls', time2: 'ENH Vilankulo', placar1: '-', placar2: '-' },
-      { rodada: 18, data: '09.11', hora: '14:45', time1: 'Textafrica', time2: 'Ferroviário Maputo', placar1: '-', placar2: '-' },
-      { rodada: 19, data: '09.11', hora: '15:00', time1: 'ENH Vilankulo', time2: 'Nacala', placar1: '-', placar2: '-' },
-      { rodada: 17, data: '09.11', hora: '16:00', time1: 'Costa do Sol', time2: 'Black Bulls', placar1: '-', placar2: '-' },
-      { rodada: 17, data: '12.11', hora: '15:00', time1: 'Ferroviário Maputo', time2: 'Nacala', placar1: '-', placar2: '-' },
+      { rodada: 19, data: '03.11', hora: '15:00', time1: 'Ferroviário Lichinga', time2: 'Textafrica', placar1: '5', placar2: '3' },
+      { rodada: 19, data: '02.11', hora: '15:00', time1: 'Ferroviário Nampula', time2: 'Baia de Pemba', placar1: '0', placar2: '2' },
+      { rodada: 19, data: '02.11', hora: '15:00', time1: 'Ferroviário Nacala', time2: 'Black Bulls', placar1: '1', placar2: '0' },
+      { rodada: 19, data: '01.11', hora: '15:00', time1: 'Ferroviário Maputo', time2: 'Ferroviário Beira', placar1: '3', placar2: '1' },
+      { rodada: 19, data: '31.10', hora: '15:00', time1: 'Chingale Tete', time2: 'Costa do Sol', placar1: '0', placar2: '0' },
+      { rodada: 19, data: '28.10', hora: '15:00', time1: 'Desportivo Matola', time2: 'UD Songo', placar1: '0', placar2: '4' },
+      { rodada: 18, data: '02.11', hora: '14:45', time1: 'UD Songo', time2: 'ENH Vilankulo', placar1: '2', placar2: '0' },
+      { rodada: 18, data: '26.10', hora: '15:00', time1: 'Ferroviário Beira', time2: 'Ferroviário Nampula', placar1: '2', placar2: '1' },
+      { rodada: 18, data: '25.10', hora: '14:45', time1: 'Costa do Sol', time2: 'Desportivo Matola', placar1: '2', placar2: '1' },
+      { rodada: 10, data: '28.10', hora: '15:00', time1: 'ENH Vilankulo', time2: 'Baia de Pemba', placar1: '1', placar2: '0' },
+      { rodada: 10, data: '24.10', hora: '15:00', time1: 'Baia de Pemba', time2: 'UD Songo', placar1: '0', placar2: '2' },
+      { rodada: 19, data: '20.09', hora: '14:00', time1: 'AD Vilankulo', time2: 'Desportivo Nacala', placar1: 'ADI', placar2: '' },
     ];
 
     // Agrupar por rodada
@@ -1728,6 +1734,9 @@ export default function App() {
         <StatusBar style="auto" />
         <View style={styles.searchHeader}>
           <Text style={styles.searchHeaderTitle}>Partidas</Text>
+        </View>
+        <View style={styles.tableSubtitleContainer}>
+          <Text style={styles.tableSubtitle}>Últimas partidas</Text>
         </View>
         <ScrollView>
           {Object.keys(partidasPorRodada).sort((a, b) => b - a).map((rodada) => (
