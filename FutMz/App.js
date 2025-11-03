@@ -1652,7 +1652,7 @@ export default function App() {
           <Text style={styles.searchHeaderTitle}>Tabela</Text>
         </View>
         <View style={styles.tableSubtitleContainer}>
-          <Text style={styles.tableSubtitle}>Classificação - 21ª Jornada</Text>
+          <Text style={styles.tableSubtitle}>Classificação</Text>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.tableContainer}>
