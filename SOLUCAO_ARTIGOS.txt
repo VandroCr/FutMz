@@ -1,0 +1,75 @@
+═══════════════════════════════════════════════════════════════
+       🔧 SOLUÇÃO: ARTIGOS NÃO APARECEM NO CELULAR
+═══════════════════════════════════════════════════════════════
+
+✅ PROBLEMA IDENTIFICADO:
+O banco de dados no Render está vazio.
+Por isso não aparecem artigos.
+
+═══════════════════════════════════════════════════════════════
+              ✅ SOLUÇÃO RÁPIDA - 2 OPÇÕES
+═══════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - CRIAR ARTIGOS PELA INTERFACE WEB (MAIS FÁCIL):
+═══════════════════════════════════════════════════════════════
+
+1. Abra seu navegador
+2. Acesse: https://futmz.onrender.com
+3. Faça login com suas credenciais de admin
+4. Clique em "Criar Artigo" ou "Novo Artigo"
+5. Preencha:
+   - Título
+   - Conteúdo
+   - Categoria (Nacional)
+   - Faça upload de imagem
+6. Clique em "Publicar"
+7. Volte para o app no celular e atualize (puxe para baixo)
+
+TEMPO: ~5 minutos
+
+───────────────────────────────────────────────────────────────
+
+OPÇÃO 2 - CRIAR ARTIGOS LOCALMENTE E ENVIAR PARA GITHUB:
+═══════════════════════════════════════════════════════════════
+
+1. Vá para a pasta backend no terminal
+2. Execute: python create_sample_articles.py
+3. Faça commit e push para GitHub
+4. O Render vai recriar o banco com os artigos
+
+═══════════════════════════════════════════════════════════════
+
+              ⚠️ IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+O banco no Render é separado do banco local!
+Artigos criados no seu computador NÃO aparecem no Render
+automaticamente.
+
+Você DEVE criar artigos:
+- Pela interface web do Render, OU
+- Enviar o banco para o GitHub (mais complexo)
+
+═══════════════════════════════════════════════════════════════
+
+              🎯 RECOMENDAÇÃO
+═══════════════════════════════════════════════════════════════
+
+Use a OPÇÃO 1 (interface web) - É mais rápida!
+
+1. Acesse: https://futmz.onrender.com
+2. Login como admin
+3. Crie 3-4 artigos de exemplo
+4. Depois é só ir criando novos artigos quando precisar
+
+═══════════════════════════════════════════════════════════════
+
+              📱 DEPOIS DE ADICIONAR ARTIGOS
+═══════════════════════════════════════════════════════════════
+
+1. Abra o Expo Go no celular
+2. Puxe para BAIXO para atualizar o app
+3. Os artigos devem aparecer!
+
+═══════════════════════════════════════════════════════════════
+

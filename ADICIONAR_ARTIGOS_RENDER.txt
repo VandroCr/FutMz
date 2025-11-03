@@ -1,0 +1,51 @@
+═══════════════════════════════════════════════════════════════
+       🔧 ADICIONAR ARTIGOS NO BACKEND DO RENDER
+═══════════════════════════════════════════════════════════════
+
+Para que os artigos apareçam no seu app, você precisa adicionar
+artigos no banco de dados do Render (produção).
+
+═══════════════════════════════════════════════════════════════
+              📝 OPÇÕES PARA ADICIONAR ARTIGOS
+═══════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - VIA INTERFACE DO APP (MAIS FÁCIL):
+1. Fazer login como admin no app web: https://futmz.onrender.com
+2. Criar artigos pela interface admin
+3. Upload de imagens funciona normalmente
+
+OPÇÃO 2 - VIA CÓDIGO LOCAL:
+1. Executar script de criar artigos
+2. Fazer commit e push para GitHub
+3. O Render vai recriar o banco com os artigos
+
+═══════════════════════════════════════════════════════════════
+
+Vamos usar a OPÇÃO 1 (mais rápida):
+
+1️⃣ FAZER LOGIN NO APP:
+   https://futmz.onrender.com
+
+2️⃣ CRIAR ARTIGOS:
+   - Clicar em "Criar Artigo"
+   - Preencher dados
+   - Fazer upload de imagens
+   - Publicar
+
+3️⃣ VERIFICAR SE FUNCIONOU:
+   https://futmz.onrender.com/api/articles
+
+═══════════════════════════════════════════════════════════════
+
+              ⚠️ IMPORTANTE SOBRE BANCO DE DADOS
+═══════════════════════════════════════════════════════════════
+
+O banco local (futmz.db) é diferente do banco em produção.
+Artigos criados localmente NÃO aparecem no Render automaticamente.
+
+Para sincronizar, você precisa:
+- Fazer upload pelo app do Render, OU
+- Configurar PostgreSQL no Render (mais complexo)
+
+═══════════════════════════════════════════════════════════════
+

@@ -1,0 +1,107 @@
+═══════════════════════════════════════════════════════════════
+       🚀 PUBLICAR TUDO: BACKEND + FRONTEND
+═══════════════════════════════════════════════════════════════
+
+Vamos publicar as mudanças no Render E no Expo!
+
+═══════════════════════════════════════════════════════════════
+              📋 OPÇÃO 1: SCRIPT AUTOMÁTICO
+═══════════════════════════════════════════════════════════════
+
+Execute: PUBLICAR_EXPO_AGORA.bat
+
+Esse script faz TUDO automaticamente:
+1. Atualiza o backend no GitHub
+2. Publica no Expo
+
+═══════════════════════════════════════════════════════════════
+              📋 OPÇÃO 2: MANUAL (MAIS CONTROLE)
+═══════════════════════════════════════════════════════════════
+
+PASSO 1 - Atualizar Backend (Render):
+
+A) Se usar GitHub Desktop:
+   1. Abra GitHub Desktop
+   2. Commit todas as mudanças
+   3. Push para GitHub
+   4. Render faz deploy automaticamente (~5 min)
+
+B) Se usar Git Bash ou CMD:
+   1. Abra Git Bash ou CMD
+   2. Execute:
+      git add .gitignore backend/main.py backend/uploads/*.jpg
+      git add EXECUTAR_DEPLOY.bat PUBLICAR_EXPO_AGORA.bat
+      git commit -m "Fix: Permitir uploads e adicionar artigos"
+      git push
+
+PASSO 2 - Publicar App (Expo):
+
+A) Se usar CMD:
+   1. Abra CMD
+   2. Execute:
+      cd FutMz
+      eas whoami
+      (Se não estiver logado: eas login)
+      eas update --branch preview --message "Fix: Render e imagens"
+
+B) Se usar PowerShell:
+   1. Abra PowerShell
+   2. Execute:
+      cd FutMz
+      eas login
+      eas update --branch preview --message "Fix: Render e imagens"
+
+═══════════════════════════════════════════════════════════════
+              ⏱️  DEPOIS DO DEPLOY
+═══════════════════════════════════════════════════════════════
+
+1. Aguarde ~5 minutos para o Render terminar o deploy
+
+2. Acesse: https://futmz.onrender.com/docs
+
+3. Procure "POST /api/setup"
+
+4. Clique "Try it out" → "Execute"
+
+5. Isso cria:
+   ✓ Admin (admin / admin123)
+   ✓ 3 artigos COM IMAGENS!
+
+6. Verifique:
+   https://futmz.onrender.com/api/articles
+   (Deve retornar 3 artigos)
+
+7. Teste imagens:
+   https://futmz.onrender.com/uploads/0a710882-1291-44af-aed4-70457ad8a086.jpg
+
+8. No celular:
+   - Abra Expo Go
+   - Puxe para baixo para atualizar
+   - Artigos devem aparecer!
+
+═══════════════════════════════════════════════════════════════
+              ⚠️  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Se "eas" não funcionar:
+- npm install -g eas-cli
+- eas login
+
+Se não estiver autenticado:
+- eas login
+- Use suas credenciais do Expo
+
+Se Git não funcionar:
+- Use GitHub Desktop
+- Faça commit e push manualmente
+
+Se expo start não funcionar:
+- cd FutMz
+- npm start
+
+═══════════════════════════════════════════════════════════════
+
+RECOMENDAÇÃO: Execute PUBLICAR_EXPO_AGORA.bat
+
+═══════════════════════════════════════════════════════════════
+

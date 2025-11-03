@@ -1,0 +1,73 @@
+═══════════════════════════════════════════════════════════════
+              🎉 APP PUBLICADO NO EXPO!
+═══════════════════════════════════════════════════════════════
+
+✅ SEU APLICATIVO ESTÁ ONLINE E ACESSÍVEL!
+
+═══════════════════════════════════════════════════════════════
+              🔗 LINK DE PREVIEW
+═══════════════════════════════════════════════════════════════
+
+https://expo.dev/preview/update?projectId=8ff00d81-b060-4fdd-9198-aff3cbe08bd6&group=796486cc-1523-49d4-9863-1e5763dd62f9
+
+═══════════════════════════════════════════════════════════════
+              📱 COMO ACESSAR O APP
+═══════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - NO CELULAR (Mobile):
+1. Instale "Expo Go" (Google Play / App Store)
+2. Abra o app Expo Go
+3. Escaneie o QR Code ou cole o link acima
+
+OPÇÃO 2 - NO NAVEGADOR (Web):
+Acesse diretamente o link acima!
+
+═══════════════════════════════════════════════════════════════
+              📊 LINKS COMPLETOS DO PROJETO
+═══════════════════════════════════════════════════════════════
+
+📱 APP MOBILE:
+https://expo.dev/preview/update?projectId=8ff00d81-b060-4fdd-9198-aff3cbe08bd6&group=796486cc-1523-49d4-9863-1e5763dd62f9
+
+🔧 BACKEND/API:
+https://futmz.onrender.com
+
+📚 DOCUMENTAÇÃO:
+https://futmz.onrender.com/docs
+
+💻 CÓDIGO-FONTE:
+https://github.com/VandroCr/FutMz
+
+═══════════════════════════════════════════════════════════════
+              📧 ENVIAR PARA O DOCENTE
+═══════════════════════════════════════════════════════════════
+
+Template de mensagem:
+
+---
+Assunto: FutMz - Projeto Finalizado e Online
+
+Olá professor,
+
+Segue o projeto FutMz completo e hospedado:
+
+📱 APP: [LINK PREVIEW AQUI]
+🔧 API: https://futmz.onrender.com/docs
+💻 CÓDIGO: https://github.com/VandroCr/FutMz
+
+Funcionalidades:
+✅ Autenticação JWT
+✅ CRUD de artigos
+✅ Upload de imagens/vídeos
+✅ Sistema de favoritos
+✅ Painel administrativo
+✅ Interface responsiva
+
+Qualquer dúvida, estou à disposição!
+
+Att,
+[Seu Nome]
+---
+
+═══════════════════════════════════════════════════════════════
+

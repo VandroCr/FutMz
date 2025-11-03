@@ -1,0 +1,79 @@
+═══════════════════════════════════════════════════════════════
+       ✅ AGORA AS IMAGENS VÃO PARA O RENDER!
+═══════════════════════════════════════════════════════════════
+
+CORREÇÃO APLICADA:
+✓ Removi backend/uploads/*.jpg do .gitignore
+✓ Restaurei as URLs de imagem nos artigos
+✓ Atualizei o script de deploy para incluir as imagens
+
+═══════════════════════════════════════════════════════════════
+              📋 COMO FAZER O DEPLOY
+═══════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - GitHub Desktop (MAIS FÁCIL):
+1. Abra GitHub Desktop
+2. Veja TODAS as mudanças, incluindo .gitignore
+3. Veja as imagens em backend/uploads/
+4. Clique "Commit to main" com a mensagem:
+   "Fix: Permitir uploads e adicionar artigos com fotos"
+5. Clique "Push origin"
+
+OPÇÃO 2 - Git Bash:
+1. Abra Git Bash na pasta do projeto
+2. Execute:
+   git add .gitignore backend/main.py backend/uploads/*.jpg
+   git add EXECUTAR_DEPLOY.bat DEPLOY_AGORA_IMAGENS.txt
+   git commit -m "Fix: Permitir uploads e adicionar artigos com fotos"
+   git push
+
+OPÇÃO 3 - CMD:
+1. Abra CMD na pasta:
+   cd "C:\Users\vandr\OneDrive\Área de Trabalho\Revista"
+2. Execute:
+   git add .gitignore backend/main.py backend/uploads/*.jpg
+   git add EXECUTAR_DEPLOY.bat DEPLOY_AGORA_IMAGENS.txt
+   git commit -m "Fix: Permitir uploads e adicionar artigos com fotos"
+   git push
+
+═══════════════════════════════════════════════════════════════
+              ⏱️  DEPOIS DO PUSH
+═══════════════════════════════════════════════════════════════
+
+1. Aguarde ~5 minutos para o Render fazer deploy
+   (Monitor em: https://dashboard.render.com)
+
+2. Acesse: https://futmz.onrender.com/docs
+
+3. Procure "POST /api/setup"
+
+4. Clique "Try it out" → "Execute"
+
+5. Isso vai criar:
+   ✓ Admin (admin / admin123)
+   ✓ 3 artigos COM IMAGENS!
+
+6. Verifique os artigos:
+   https://futmz.onrender.com/api/articles
+   
+   Deve retornar 3 artigos, cada um com image_url!
+
+7. Teste as imagens:
+   https://futmz.onrender.com/uploads/0a710882-1291-44af-aed4-70457ad8a086.jpg
+   (e as outras 2 URLs)
+
+8. No celular, atualize o app (expo start)
+
+═══════════════════════════════════════════════════════════════
+              📝 RESUMO
+═══════════════════════════════════════════════════════════════
+
+✓ .gitignore atualizado para permitir uploads
+✓ 3 imagens vão ser enviadas ao GitHub
+✓ Artigos com URLs de imagem restauradas
+✓ Script de deploy atualizado
+
+AGORA: Só falta fazer o PUSH!
+
+═══════════════════════════════════════════════════════════════
+

@@ -1,0 +1,87 @@
+═══════════════════════════════════════════════════════════════
+       📱 COMO ATUALIZAR SEU APP NO CELULAR
+═══════════════════════════════════════════════════════════════
+
+Para ver os artigos e novas funcionalidades no celular, siga
+ESTA ordem:
+
+═══════════════════════════════════════════════════════════════
+              1️⃣ ATUALIZAR GITHUB
+═══════════════════════════════════════════════════════════════
+
+Execute no terminal CMD:
+
+   cd "C:\Users\vandr\OneDrive\Área de Trabalho\Revista"
+   
+   git add FutMz/App.js FutMz/config.js
+   git commit -m "Update: Funcionalidades completas"
+   git push
+
+Ou simplesmente execute: PUBLICAR_GITHUB.bat
+
+═══════════════════════════════════════════════════════════════
+              2️⃣ PUBLICAR NO EXPO
+═══════════════════════════════════════════════════════════════
+
+Execute no terminal CMD:
+
+   cd FutMz
+   eas update --branch preview
+
+Ou execute: ATUALIZAR_TUDO.bat (faz tudo automaticamente)
+
+AGUARDE terminar (~5 minutos)
+
+═══════════════════════════════════════════════════════════════
+              3️⃣ ADICIONAR ARTIGOS (IMPORTANTE!)
+═══════════════════════════════════════════════════════════════
+
+Acesse no navegador:
+   https://futmz.onrender.com
+
+Faça login como admin e crie 3-4 artigos.
+
+SEM ARTIGOS, NADA VAI APARECER NO CELULAR!
+
+═══════════════════════════════════════════════════════════════
+              4️⃣ ATUALIZAR NO CELULAR
+═══════════════════════════════════════════════════════════════
+
+1. Abra o Expo Go no celular
+2. Encontre "FutMz" na lista
+3. Abra o app
+4. Puxe para BAIXO (refrescar)
+5. Aguarde carregar
+
+Os artigos devem aparecer! 🎉
+
+═══════════════════════════════════════════════════════════════
+              ⚠️ SE NÃO FUNCIONAR
+═══════════════════════════════════════════════════════════════
+
+Problema: Artigos não aparecem
+Solução: Você criou artigos no Render?
+   → Acesse https://futmz.onrender.com
+   → Login → Criar artigos
+
+Problema: App não atualiza no celular
+Solução: Reinicie o Expo Go completamente
+   → Feche o app
+   → Abra novamente
+   → Escaneie o QR code de novo
+
+Problema: Erro ao executar comandos
+Solução: Abra CMD manualmente (não PowerShell)
+   → Execute os comandos um por um
+   → Veja as mensagens de erro
+
+═══════════════════════════════════════════════════════════════
+
+                 🎯 COMECE AGORA!
+
+Execute: ATUALIZAR_TUDO.bat
+
+Ou siga os passos 1 e 2 manualmente.
+
+═══════════════════════════════════════════════════════════════
+

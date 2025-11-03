@@ -20,7 +20,7 @@ echo.
 echo [INFO] Publicando atualização no Expo...
 echo.
 
-eas update --branch preview --message "Update: Login opcional e CRUD de tabelas"
+eas update --branch preview --message "Fix: Forçar uso do Render e artigos com imagens"
 
 if %ERRORLEVEL% NEQ 0 (
     echo.

@@ -1,0 +1,92 @@
+═══════════════════════════════════════════════════════════════
+       ⏱️ TEMPO DE DEPLOY NO RENDER
+═══════════════════════════════════════════════════════════════
+
+✅ SIM, você precisa aguardar!
+
+═══════════════════════════════════════════════════════════════
+              ⏱️ TEMPO TÍPICO DE DEPLOY
+═══════════════════════════════════════════════════════════════
+
+PRIMEIRO DEPLOY (quando cria o serviço):
+   ⏱️  5-10 minutos
+   
+   Porque:
+   - Instalar Python
+   - Instalar dependências
+   - Criar banco de dados
+   - Iniciar aplicação
+
+DEPLOYS SUBSEQUENTES (atualizações):
+   ⏱️  2-4 minutos
+   
+   Porque:
+   - Apenas atualiza código
+   - Reinicia aplicação
+
+═══════════════════════════════════════════════════════════════
+              🔍 COMO VERIFICAR PROGRESSO
+═══════════════════════════════════════════════════════════════
+
+1. Acesse: https://dashboard.render.com
+
+2. Clique no seu serviço "futmz"
+
+3. Veja a aba "Events" ou "Logs"
+
+4. Status pode ser:
+   ✅ "Live" (verde) = Funcionando!
+   🟡 "Building" = Ainda fazendo deploy
+   🔴 "Failed" = Erro (ver logs)
+
+═══════════════════════════════════════════════════════════════
+              ⚡ MAIS RÁPIDO SE USAR RENDER.COM PRO (PAGO)
+═══════════════════════════════════════════════════════════════
+
+Plano GRATUITO:
+   ⏱️  Deploy: 2-10 minutos
+   ⏱️  Sleep após 15 min inativo
+   ⏱️  Startup: 50-60 segundos (cold start)
+
+Plano PAGO ($7/mês):
+   ⏱️  Deploy: 1-3 minutos
+   ⏱️  Sempre ativo (sem sleep)
+   ⏱️  Startup: Instantâneo
+
+═══════════════════════════════════════════════════════════════
+              ⚠️ PLANO FREE SLEEPS APÓS 15 MIN
+═══════════════════════════════════════════════════════════════
+
+No plano GRATUITO:
+- Se ficar 15 minutos sem uso → Dorme
+- Primeiro acesso após dormir = 50-60 segundos de espera
+- Chamadas seguintes = Instantâneas
+
+Isso é NORMAL e esperado no plano free!
+
+═══════════════════════════════════════════════════════════════
+              ✅ COMO SABER QUANDO TERMINOU
+═══════════════════════════════════════════════════════════════
+
+Opção 1: Dashboard Render
+   - Status: "Live" (verde)
+   - URL: Funcional
+
+Opção 2: Testar diretamente
+   https://futmz.onrender.com/docs
+   
+   Se carregar a documentação = PRONTO! ✅
+
+Opção 3: Ver logs
+   Dashboard → Logs → Ver últimas mensagens
+
+═══════════════════════════════════════════════════════════════
+
+                 ⏱️ RESPOSTA CURTA:
+
+SIM, aguarde 2-10 minutos dependendo do tipo de deploy.
+
+Verifique em: https://dashboard.render.com
+
+═══════════════════════════════════════════════════════════════
+

@@ -1,0 +1,60 @@
+═══════════════════════════════════════════════════════════════
+              📊 SITUAÇÃO ATUAL DO PROJETO
+═══════════════════════════════════════════════════════════════
+
+✅ BACKEND: Funcionando em https://futmz.onrender.com
+✅ API: Respondendo corretamente (sem artigos ainda)
+✅ FRONTEND: Código atualizado e sem erros
+⚠️ APP MOBILE: Versão antiga no celular
+
+═══════════════════════════════════════════════════════════════
+              🎯 O QUE FOI IMPLEMENTADO
+═══════════════════════════════════════════════════════════════
+
+✅ Login opcional (app inicia na Home)
+✅ Botão "Entrar" no header quando não logado
+✅ Todos podem ver artigos completos
+✅ CRUD de Equipas (com logotipos)
+✅ CRUD de Tabela de Classificação (inline editing)
+✅ CRUD de Artilheiros (inline editing)
+✅ Aba Partidas com dados reais
+✅ Aba Tabela com classificação e artilheiros
+
+═══════════════════════════════════════════════════════════════
+              🔧 PARA OS ARTIGOS APARECEREM
+═══════════════════════════════════════════════════════════════
+
+PROBLEMA 1: Banco de dados vazio no Render
+SOLUÇÃO: Criar artigos via interface web
+   → Acesse: https://futmz.onrender.com
+   → Faça login como admin
+   → Crie artigos
+
+PROBLEMA 2: App no celular desatualizado
+SOLUÇÃO: Publicar atualização no Expo
+   → Execute: eas update
+
+═══════════════════════════════════════════════════════════════
+              📝 COMANDOS RÁPIDOS
+═══════════════════════════════════════════════════════════════
+
+Publicar atualização:
+   cd FutMz
+   eas update --branch preview
+
+Ver API:
+   https://futmz.onrender.com/docs
+
+Ver artigos:
+   https://futmz.onrender.com/api/articles
+
+═══════════════════════════════════════════════════════════════
+
+                 ✅ CÓDIGO ESTÁ PRONTO!
+
+Apenas precisa:
+1. Publicar atualização no Expo
+2. Adicionar artigos no Render
+
+═══════════════════════════════════════════════════════════════
+

@@ -8,12 +8,7 @@ echo.
 cd /d "%~dp0"
 
 echo [1/3] Adicionando arquivos ao Git...
-git add .gitignore backend/main.py backend/verificar_artigos.py
-git add backend/uploads/*.jpg
-git add ARTIGOS_COM_IMAGENS.txt COMO_USAR_ENDPOINT_SETUP.txt DEPLOY_MANUAL_COMPLETO.txt
-git add ATUALIZAR_RENDER_AGORA.bat VERIFICAR_BANCO_LOCAL.bat EXECUTAR_DEPLOY.bat
-git add DEPLOY_AGORA_INSTRUCOES.txt ARTIGOS_FUNCIONAM_SEM_FOTOS.txt SOLUCAO_FINAL.txt
-git add TESTAR_IMAGENS.bat
+git add .
 if %ERRORLEVEL% NEQ 0 (
     echo [AVISO] Git pode não estar no PATH
     echo.
@@ -21,7 +16,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 echo.
 echo [2/3] Fazendo commit...
-git commit -m "Fix: Permitir uploads de imagens e adicionar artigos com fotos" 2>nul
+git commit -m "Add: Scripts de importacao e todos os artigos com imagens" 2>nul
 if %ERRORLEVEL% NEQ 0 (
     echo [AVISO] Commit pode ter falhado ou não há mudanças novas
     echo.
@@ -41,8 +36,8 @@ if %ERRORLEVEL% NEQ 0 (
     echo SOLUÇÃO: Use GitHub Desktop ou Git Bash
     echo.
     echo Ou execute MANUALMENTE no CMD:
-    echo   git add .gitignore backend/main.py backend/uploads/*.jpg
-    echo   git commit -m "Fix: Permitir uploads e adicionar artigos com fotos"
+    echo   git add .
+    echo   git commit -m "Add: Scripts e artigos com imagens"
     echo   git push
     echo.
     pause
