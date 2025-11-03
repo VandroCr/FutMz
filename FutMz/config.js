@@ -13,14 +13,10 @@ const DEV_SERVER_URL = Platform.OS === 'web'
   ? 'http://localhost:8000'
   : 'http://192.168.43.171:8000'; // IP da sua máquina na rede Wi-Fi
 
-export const API_URL = __DEV__ 
-  ? DEV_API_URL
-  : 'https://futmz.onrender.com/api'; // Produção no Render
+export const API_URL = 'https://futmz.onrender.com/api'; // URL de produção no Render
 
 // URL base do servidor (sem /api)
-export const SERVER_URL = __DEV__ 
-  ? DEV_SERVER_URL
-  : 'https://futmz.onrender.com'; // Produção no Render
+export const SERVER_URL = 'https://futmz.onrender.com'; // URL de produção no Render
 
 export const STORAGE_KEYS = {
   AUTH_TOKEN: '@FutMz:auth_token',
