@@ -26,6 +26,9 @@ export default function App() {
   const [selectedTeamLogo, setSelectedTeamLogo] = useState(null);
   const [editSelectedTeamLogo, setEditSelectedTeamLogo] = useState(null);
   
+  // Table tabs state
+  const [activeTableTab, setActiveTableTab] = useState('classificacao'); // 'classificacao' or 'artilheiros'
+  
   // Login state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -1645,59 +1648,123 @@ export default function App() {
       { pos: 14, equipa: 'Desportivo Matola', j: 17, v: 1, e: 4, d: 12, gm: 9, gs: 27, dg: -18, pts: 7, dp: 7, highlight: '#f8d7da' },
     ];
 
+    // Dados dos artilheiros
+    const artilheiros = [
+      { pos: 1, jogador: 'Miquissone L.', equipe: 'UD Songo', gols: 10 },
+      { pos: 2, jogador: 'Chester Y.', equipe: 'UD Songo', gols: 9 },
+      { pos: 3, jogador: 'Tomas T. A. M.', equipe: 'ENH Vilankulo', gols: 8 },
+      { pos: 4, jogador: 'Cantolo A.', equipe: 'Chingale de Tete', gols: 6 },
+      { pos: 4, jogador: 'Mario I.', equipe: 'Ferroviario Lichinga', gols: 6 },
+      { pos: 4, jogador: 'Reis A.', equipe: 'UD Songo', gols: 6 },
+      { pos: 4, jogador: 'Tesoura Junior V. J.', equipe: 'UD Songo', gols: 6 },
+      { pos: 8, jogador: 'Abdulkarim Y.', equipe: 'Ferroviario Nampula', gols: 5 },
+      { pos: 8, jogador: 'Antonio D.', equipe: 'Ferroviario Beira', gols: 5 },
+      { pos: 8, jogador: 'Calisto C.', equipe: 'Ferroviário Maputo', gols: 5 },
+      { pos: 8, jogador: 'Carvalho I.', equipe: 'Baia de Pemba', gols: 5 },
+      { pos: 8, jogador: 'Hammed', equipe: 'Black Bulls', gols: 5 },
+      { pos: 8, jogador: 'Saide M.', equipe: 'Ferroviario Lichinga', gols: 5 },
+      { pos: 14, jogador: 'Brezzy B', equipe: 'Ferroviario Lichinga', gols: 4 },
+      { pos: 14, jogador: 'Cherene O.', equipe: 'UD Songo', gols: 4 },
+      { pos: 14, jogador: 'Cipriano S.', equipe: 'Baia de Pemba', gols: 4 },
+    ];
+
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.searchHeader}>
           <Text style={styles.searchHeaderTitle}>Tabela</Text>
         </View>
-        <View style={styles.tableSubtitleContainer}>
-          <Text style={styles.tableSubtitle}>Classificação</Text>
+        
+        {/* Tabs */}
+        <View style={styles.tableTabsContainer}>
+          <TouchableOpacity 
+            style={[styles.tableTab, activeTableTab === 'classificacao' && styles.tableTabActive]} 
+            onPress={() => setActiveTableTab('classificacao')}
+          >
+            <Text style={[styles.tableTabText, activeTableTab === 'classificacao' && styles.tableTabTextActive]}>
+              Classificação
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.tableTab, activeTableTab === 'artilheiros' && styles.tableTabActive]} 
+            onPress={() => setActiveTableTab('artilheiros')}
+          >
+            <Text style={[styles.tableTabText, activeTableTab === 'artilheiros' && styles.tableTabTextActive]}>
+              Artilheiros
+            </Text>
+          </TouchableOpacity>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={styles.tableContainer}>
-            {/* Cabeçalho da tabela */}
-            <View style={styles.tableHeader}>
-              <Text style={styles.tableHeaderText}>Pos</Text>
-              <Text style={[styles.tableHeaderText, styles.tableTeamColumn]}>Equipa</Text>
-              <Text style={styles.tableHeaderText}>J</Text>
-              <Text style={styles.tableHeaderText}>V</Text>
-              <Text style={styles.tableHeaderText}>E</Text>
-              <Text style={styles.tableHeaderText}>D</Text>
-              <Text style={styles.tableHeaderText}>GM</Text>
-              <Text style={styles.tableHeaderText}>GS</Text>
-              <Text style={styles.tableHeaderText}>DG</Text>
-              <Text style={styles.tableHeaderText}>P</Text>
-            </View>
-            
-            {/* Linhas da tabela */}
-            {classificacao.map((item) => (
-              <View key={item.pos} style={[styles.tableRow, item.highlight && { backgroundColor: item.highlight }]}>
-                <Text style={styles.tableCell}>{item.pos}</Text>
-                <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.equipa}</Text>
-                <Text style={styles.tableCell}>{item.j}</Text>
-                <Text style={styles.tableCell}>{item.v}</Text>
-                <Text style={styles.tableCell}>{item.e}</Text>
-                <Text style={styles.tableCell}>{item.d}</Text>
-                <Text style={styles.tableCell}>{item.gm}</Text>
-                <Text style={styles.tableCell}>{item.gs}</Text>
-                <Text style={styles.tableCell}>{item.dg}</Text>
-                <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
+
+        {activeTableTab === 'classificacao' ? (
+          <ScrollView>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={styles.tableContainer}>
+                {/* Cabeçalho da tabela */}
+                <View style={styles.tableHeader}>
+                  <Text style={styles.tableHeaderText}>Pos</Text>
+                  <Text style={[styles.tableHeaderText, styles.tableTeamColumn]}>Equipa</Text>
+                  <Text style={styles.tableHeaderText}>J</Text>
+                  <Text style={styles.tableHeaderText}>V</Text>
+                  <Text style={styles.tableHeaderText}>E</Text>
+                  <Text style={styles.tableHeaderText}>D</Text>
+                  <Text style={styles.tableHeaderText}>GM</Text>
+                  <Text style={styles.tableHeaderText}>GS</Text>
+                  <Text style={styles.tableHeaderText}>DG</Text>
+                  <Text style={styles.tableHeaderText}>P</Text>
+                </View>
+                
+                {/* Linhas da tabela */}
+                {classificacao.map((item) => (
+                  <View key={item.pos} style={[styles.tableRow, item.highlight && { backgroundColor: item.highlight }]}>
+                    <Text style={styles.tableCell}>{item.pos}</Text>
+                    <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.equipa}</Text>
+                    <Text style={styles.tableCell}>{item.j}</Text>
+                    <Text style={styles.tableCell}>{item.v}</Text>
+                    <Text style={styles.tableCell}>{item.e}</Text>
+                    <Text style={styles.tableCell}>{item.d}</Text>
+                    <Text style={styles.tableCell}>{item.gm}</Text>
+                    <Text style={styles.tableCell}>{item.gs}</Text>
+                    <Text style={styles.tableCell}>{item.dg}</Text>
+                    <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
+                  </View>
+                ))}
               </View>
-            ))}
-          </View>
-        </ScrollView>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legendTitle}>Notas da classificação</Text>
-          <View style={styles.legendItem}>
-            <View style={[styles.legendSquare, styles.legendSquareGreen]} />
-            <Text style={styles.legendText}>CAF Champions League</Text>
-          </View>
-          <View style={styles.legendItem}>
-            <View style={[styles.legendSquare, styles.legendSquareRed]} />
-            <Text style={styles.legendText}>Despromoção</Text>
-          </View>
-        </View>
+            </ScrollView>
+            <View style={styles.legendContainer}>
+              <Text style={styles.legendTitle}>Notas da classificação</Text>
+              <View style={styles.legendItem}>
+                <View style={[styles.legendSquare, styles.legendSquareGreen]} />
+                <Text style={styles.legendText}>CAF Champions League</Text>
+              </View>
+              <View style={styles.legendItem}>
+                <View style={[styles.legendSquare, styles.legendSquareRed]} />
+                <Text style={styles.legendText}>Despromoção</Text>
+              </View>
+            </View>
+          </ScrollView>
+        ) : (
+          <ScrollView>
+            <View style={styles.tableContainer}>
+              {/* Cabeçalho da tabela de artilheiros */}
+              <View style={styles.tableHeader}>
+                <Text style={styles.tableHeaderText}>#</Text>
+                <Text style={[styles.tableHeaderText, styles.tableTeamColumn]}>JOGADOR</Text>
+                <Text style={[styles.tableHeaderText, styles.tableTeamColumn]}>EQUIPE</Text>
+                <Text style={styles.tableHeaderText}>G</Text>
+              </View>
+              
+              {/* Linhas da tabela de artilheiros */}
+              {artilheiros.map((item, index) => (
+                <View key={index} style={styles.tableRow}>
+                  <Text style={styles.tableCell}>{item.pos}</Text>
+                  <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.jogador}</Text>
+                  <Text style={[styles.tableCell, styles.tableTeamColumn]}>{item.equipe}</Text>
+                  <Text style={[styles.tableCell, styles.tablePoints]}>{item.gols}</Text>
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+        )}
       </View>
     );
   };
@@ -2889,6 +2956,32 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   // Table styles
+  tableTabsContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  tableTab: {
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  tableTabActive: {
+    borderBottomColor: '#228B22',
+  },
+  tableTabText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#999',
+  },
+  tableTabTextActive: {
+    color: '#228B22',
+  },
   tableSubtitleContainer: {
     paddingHorizontal: 15,
     paddingTop: 10,
