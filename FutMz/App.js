@@ -1649,7 +1649,10 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.searchHeader}>
-          <Text style={styles.searchHeaderTitle}>Classificação - 21ª Jornada</Text>
+          <Text style={styles.searchHeaderTitle}>Tabela</Text>
+        </View>
+        <View style={styles.tableSubtitleContainer}>
+          <Text style={styles.tableSubtitle}>Classificação - 21ª Jornada</Text>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.tableContainer}>
@@ -2821,6 +2824,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   // Table styles
+  tableSubtitleContainer: {
+    paddingHorizontal: 15,
+    paddingTop: 10,
+  },
+  tableSubtitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#DC143C',
+  },
   tableContainer: {
     padding: 15,
   },
