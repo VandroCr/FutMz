@@ -1,0 +1,82 @@
+📱 COMO USAR O APP NO SEU CELULAR - FutMz
+
+===============================================
+📋 PRÉ-REQUISITOS:
+===============================================
+
+✅ Backend rodando (porta 8000)
+✅ Aplicativo Expo Go instalado no celular
+✅ Celular e computador na MESMA rede Wi-Fi
+✅ Firewall do Windows configurado
+
+===============================================
+🚀 PASSO A PASSO:
+===============================================
+
+1. INSTALE O EXPO GO NO SEU CELULAR:
+   - Android: https://play.google.com/store/apps/details?id=host.exp.exponent
+   - iOS: https://apps.apple.com/app/expo-go/id982107779
+
+2. VERIFIQUE A CONEXÃO:
+   - Celular e computador devem estar na MESMA rede Wi-Fi
+   - Backend deve estar rodando em http://localhost:8000
+
+3. SCANEEIE O QR CODE:
+   - Abra o Expo Go no celular
+   - Toque em "Scan QR Code"
+   - Aponte a câmera para o QR code na tela do terminal
+
+4. SE NÃO CONECTAR:
+   - Abra o Expo Go
+   - Digite manualmente: exp://192.168.43.171:8081
+   - Pressione Connect
+
+===============================================
+⚠️ PROBLEMAS COMUNS:
+===============================================
+
+❌ "Unable to connect to server"
+   → Verifique se o backend está rodando
+   → Confirme que estão na mesma rede Wi-Fi
+   → Confira o IP no config.js
+
+❌ "Network request failed"
+   → Desabilite temporariamente o firewall
+   → Reinicie o servidor Expo (Ctrl+C e npm start)
+
+❌ QR Code não funciona
+   → Digite manualmente: exp://192.168.43.171:8081
+   → Ou pressione 'a' no terminal para Android
+
+===============================================
+🔐 CONFIGURAÇÃO DO FIREWALL:
+===============================================
+
+1. Pressione Windows + R
+2. Digite: wf.msc
+3. Clique em "Inbound Rules" > "New Rule"
+4. Escolha "Port" > "TCP" > "Specific local ports"
+5. Digite: 8000,8081
+6. Escolha "Allow the connection"
+7. Marque todas as opções
+8. Dê um nome: "Expo Development"
+
+===============================================
+📞 AJUDA:
+===============================================
+
+IP do seu computador: 192.168.43.171
+Porta do backend: 8000
+Porta do Expo: 8081
+
+Se precisar mudar o Wi-Fi:
+→ Execute: ipconfig
+→ Procure o IPv4 Address
+→ Atualize o arquivo FutMz/config.js
+
+===============================================
+
+Bom uso do app! 🎉
+
+
+

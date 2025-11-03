@@ -1,0 +1,33 @@
+📸 COMO CARREGAR FOTOS NO ARTIGO
+
+Para adicionar uma foto ao seu artigo:
+
+1️⃣ COLE O LINK DA IMAGEM:
+   - Acesse Google Images ou outro site
+   - Clique com botão direito na imagem
+   - Escolha "Copiar endereço da imagem"
+   - Cole no campo "Link da Foto"
+
+2️⃣ VERIFIQUE A PREVIEW:
+   - Após colar o link, a imagem aparecerá automaticamente
+   - Certifique-se que a imagem está correta
+
+3️⃣ EXEMPLOS DE LINKS VÁLIDOS:
+   ✅ https://exemplo.com/foto.jpg
+   ✅ https://exemplo.com/foto.png
+   ✅ https://upload.wikimedia.org/...
+   
+   ❌ https://exemplo.com/pagina (não é o link direto da imagem)
+
+4️⃣ DICAS:
+   - Use imagens com boa qualidade
+   - Prefira imagens horizontais (compridas)
+   - Evite imagens muito pesadas
+
+OS CAMPOS OBRIGATÓRIOS SÃO:
+   ✓ Título do Artigo
+   ✓ Categoria (Nacional ou Internacional)
+   ✓ Link da Foto
+   ✓ Conteúdo Completo
+
+

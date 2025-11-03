@@ -1,0 +1,69 @@
+═══════════════════════════════════════════════════════════════
+           🚀 FUTMZ - APLICATIVO DE FUTEBOL MOÇAMBICANO 🚀
+═══════════════════════════════════════════════════════════════
+
+BEM-VINDO!
+
+Este projeto contém um aplicativo completo de revista de futebol
+com frontend (React Native) e backend (FastAPI).
+
+═══════════════════════════════════════════════════════════════
+                    📌 COMEÇAR AQUI
+═══════════════════════════════════════════════════════════════
+
+Para PUBLICAR e HOSPEDAR seu app na internet:
+
+➤ Abra: INICIO_RAPIDO_DEPLOY.md
+   (Tempo estimado: 30 minutos)
+
+Este guia vai te mostrar:
+  ✅ Como publicar no GitHub
+  ✅ Como hospedar o backend no Render.com (GRÁTIS)
+  ✅ Como publicar o app no Expo
+  ✅ Como gerar link para compartilhar com o docente
+
+═══════════════════════════════════════════════════════════════
+                    📁 ARQUIVOS IMPORTANTES
+═══════════════════════════════════════════════════════════════
+
+📘 DOCUMENTAÇÃO:
+   - README.md                      → Visão geral do projeto
+   - INICIO_RAPIDO_DEPLOY.md        → ⭐ INÍCIO RÁPIDO!
+   - GUIA_DEPLOY_COMPLETO.md        → Guia detalhado
+   - PUBLICAR_NO_GITHUB.md          → Publicar no GitHub
+   - CONFIGURAR_POSTGRESQL.md       → Banco de dados
+
+⚙️ SCRIPTS:
+   - PUBLICAR_GITHUB.bat            → Publicar no GitHub (Windows)
+   - DEPLOY_EXPO.bat                → Publicar no Expo
+
+📁 ESTRUTURA:
+   - FutMz/                         → Aplicativo React Native
+   - backend/                       → API FastAPI
+   - .gitignore                     → Arquivos ignorados pelo Git
+
+═══════════════════════════════════════════════════════════════
+                    🎯 OBJETIVO
+═══════════════════════════════════════════════════════════════
+
+1. Hospedar o backend na internet (Render.com)
+2. Publicar o app no Expo
+3. Gerar link para o docente acessar
+4. Mostrar que o app funciona online
+
+═══════════════════════════════════════════════════════════════
+                    📞 PRECISA DE AJUDA?
+═══════════════════════════════════════════════════════════════
+
+Consulte os guias em ordem:
+
+1. INICIO_RAPIDO_DEPLOY.md (ler primeiro)
+2. GUIA_DEPLOY_COMPLETO.md (detalhes)
+3. Problemas? Veja "Resolução de Problemas" nos guias
+
+═══════════════════════════════════════════════════════════════
+
+                 BOA SORTE! 🚀⚽
+
+═══════════════════════════════════════════════════════════════
+
