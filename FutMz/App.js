@@ -1627,75 +1627,63 @@ export default function App() {
 
   // Render Search Screen Component (Tabela)
   const renderSearchScreen = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [isSearching, setIsSearching] = useState(false);
-
-    const handleSearch = async () => {
-      if (!searchQuery.trim()) return;
-      
-      setIsSearching(true);
-      try {
-        const response = await fetch(`${API_URL}/articles?search=${encodeURIComponent(searchQuery)}&published=true`);
-        if (response.ok) {
-          const data = await response.json();
-          setSearchResults(data);
-        }
-      } catch (error) {
-        Alert.alert('Erro', 'Erro ao buscar artigos');
-      } finally {
-        setIsSearching(false);
-      }
-    };
+    // Dados da classificação
+    const classificacao = [
+      { pos: 1, equipa: 'UD Songo', j: 18, v: 15, e: 2, d: 1, gm: 40, gs: 10, dg: 30, pts: 47, dp: 0, highlight: '#d4edda' },
+      { pos: 2, equipa: 'Ferroviário Beira', j: 19, v: 8, e: 6, d: 5, gm: 16, gs: 12, dg: 4, pts: 30, dp: 17 },
+      { pos: 3, equipa: 'Black Bulls', j: 15, v: 8, e: 3, d: 4, gm: 24, gs: 17, dg: 7, pts: 27, dp: 3 },
+      { pos: 4, equipa: 'Costa do Sol', j: 18, v: 6, e: 9, d: 3, gm: 15, gs: 11, dg: 4, pts: 27, dp: 0 },
+      { pos: 5, equipa: 'Ferroviário Lichinga', j: 18, v: 7, e: 6, d: 5, gm: 30, gs: 27, dg: 3, pts: 27, dp: 0 },
+      { pos: 6, equipa: 'Ferroviário Maputo', j: 16, v: 5, e: 10, d: 1, gm: 19, gs: 11, dg: 8, pts: 25, dp: 2 },
+      { pos: 7, equipa: 'Ferroviário Nacala', j: 19, v: 6, e: 7, d: 6, gm: 13, gs: 14, dg: -1, pts: 25, dp: 0 },
+      { pos: 8, equipa: 'Bala de Pemba', j: 19, v: 6, e: 6, d: 7, gm: 18, gs: 17, dg: 1, pts: 24, dp: 1 },
+      { pos: 9, equipa: 'Chingale Tete', j: 17, v: 4, e: 8, d: 5, gm: 12, gs: 15, dg: -3, pts: 20, dp: 4 },
+      { pos: 10, equipa: 'AD Vilankulo', j: 16, v: 4, e: 6, d: 6, gm: 15, gs: 18, dg: -3, pts: 18, dp: 2 },
+      { pos: 11, equipa: 'Textafrica Chimolo', j: 18, v: 3, e: 7, d: 8, gm: 11, gs: 21, dg: -10, pts: 16, dp: 2 },
+      { pos: 12, equipa: 'Ferroviário Nampula', j: 17, v: 3, e: 7, d: 7, gm: 13, gs: 24, dg: -11, pts: 16, dp: 0 },
+      { pos: 13, equipa: 'Desportivo Nacala', j: 17, v: 3, e: 5, d: 9, gm: 13, gs: 24, dg: -11, pts: 14, dp: 2, highlight: '#f8d7da' },
+      { pos: 14, equipa: 'Desportivo Matola', j: 17, v: 1, e: 4, d: 12, gm: 9, gs: 27, dg: -18, pts: 7, dp: 7, highlight: '#f8d7da' },
+    ];
 
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.searchHeader}>
-          <Text style={styles.searchHeaderTitle}>Tabela</Text>
+          <Text style={styles.searchHeaderTitle}>Classificação - 21ª Jornada</Text>
         </View>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Digite sua busca..."
-            placeholderTextColor="#999"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            onSubmitEditing={handleSearch}
-          />
-          <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-            <Ionicons name="search" size={24} color="#fff" />
-          </TouchableOpacity>
-        </View>
-        {isSearching ? (
-          <View style={styles.centerContainer}>
-            <ActivityIndicator size="large" color="#228B22" />
-          </View>
-        ) : (
-          <ScrollView style={styles.searchResults}>
-            {searchResults.length === 0 && searchQuery ? (
-              <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>Nenhum resultado encontrado</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View style={styles.tableContainer}>
+            {/* Cabeçalho da tabela */}
+            <View style={styles.tableHeader}>
+              <Text style={styles.tableHeaderText}>Pos</Text>
+              <Text style={[styles.tableHeaderText, styles.tableTeamColumn]}>Equipa</Text>
+              <Text style={styles.tableHeaderText}>J</Text>
+              <Text style={styles.tableHeaderText}>V</Text>
+              <Text style={styles.tableHeaderText}>E</Text>
+              <Text style={styles.tableHeaderText}>D</Text>
+              <Text style={styles.tableHeaderText}>GM</Text>
+              <Text style={styles.tableHeaderText}>GS</Text>
+              <Text style={styles.tableHeaderText}>DG</Text>
+              <Text style={styles.tableHeaderText}>P</Text>
+            </View>
+            
+            {/* Linhas da tabela */}
+            {classificacao.map((item) => (
+              <View key={item.pos} style={[styles.tableRow, item.highlight && { backgroundColor: item.highlight }]}>
+                <Text style={styles.tableCell}>{item.pos}</Text>
+                <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.equipa}</Text>
+                <Text style={styles.tableCell}>{item.j}</Text>
+                <Text style={styles.tableCell}>{item.v}</Text>
+                <Text style={styles.tableCell}>{item.e}</Text>
+                <Text style={styles.tableCell}>{item.d}</Text>
+                <Text style={styles.tableCell}>{item.gm}</Text>
+                <Text style={styles.tableCell}>{item.gs}</Text>
+                <Text style={styles.tableCell}>{item.dg}</Text>
+                <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
               </View>
-            ) : (
-              searchResults.map((item) => (
-                <TouchableOpacity key={item.id} style={styles.articleCard} onPress={() => openArticle(item)}>
-                  <View style={styles.imageContainer}>
-                    {item.image_url && (
-                      <Image source={{ uri: item.image_url }} style={styles.articleImage} />
-                    )}
-                  </View>
-                  <View style={styles.articleContent}>
-                    <Text style={styles.articleTitle} numberOfLines={2}>{item.title}</Text>
-                    {item.excerpt && (
-                      <Text style={styles.articleExcerpt} numberOfLines={2}>{item.excerpt}</Text>
-                    )}
-                  </View>
-                </TouchableOpacity>
-              ))
-            )}
-          </ScrollView>
-        )}
+            ))}
+          </View>
+        </ScrollView>
       </View>
     );
   };
@@ -1704,12 +1692,12 @@ export default function App() {
   const renderIdeasScreen = () => {
     // Dados das partidas
     const partidas = [
-      { rodada: 16, data: '05.11', hora: '15:00', time1: 'UD Songo', escudo1: '🏅', time2: 'Ferroviário Maputo', escudo2: '🚂', placar1: '-', placar2: '-' },
-      { rodada: 10, data: '06.11', hora: '15:00', time1: 'Black Bulls', escudo1: '🐂', time2: 'ENH Vilankulo', escudo2: '🌊', placar1: '-', placar2: '-' },
-      { rodada: 18, data: '09.11', hora: '14:45', time1: 'Textafrica', escudo1: '📰', time2: 'Ferroviário Maputo', escudo2: '🚂', placar1: '-', placar2: '-' },
-      { rodada: 19, data: '09.11', hora: '15:00', time1: 'ENH Vilankulo', escudo1: '🌊', time2: 'Nacala', escudo2: '⚓', placar1: '-', placar2: '-' },
-      { rodada: 17, data: '09.11', hora: '16:00', time1: 'Costa do Sol', escudo1: '☀️', time2: 'Black Bulls', escudo2: '🐂', placar1: '-', placar2: '-' },
-      { rodada: 17, data: '12.11', hora: '15:00', time1: 'Ferroviário Maputo', escudo1: '🚂', time2: 'Nacala', escudo2: '⚓', placar1: '-', placar2: '-' },
+      { rodada: 16, data: '05.11', hora: '15:00', time1: 'UD Songo', time2: 'Ferroviário Maputo', placar1: '-', placar2: '-' },
+      { rodada: 10, data: '06.11', hora: '15:00', time1: 'Black Bulls', time2: 'ENH Vilankulo', placar1: '-', placar2: '-' },
+      { rodada: 18, data: '09.11', hora: '14:45', time1: 'Textafrica', time2: 'Ferroviário Maputo', placar1: '-', placar2: '-' },
+      { rodada: 19, data: '09.11', hora: '15:00', time1: 'ENH Vilankulo', time2: 'Nacala', placar1: '-', placar2: '-' },
+      { rodada: 17, data: '09.11', hora: '16:00', time1: 'Costa do Sol', time2: 'Black Bulls', placar1: '-', placar2: '-' },
+      { rodada: 17, data: '12.11', hora: '15:00', time1: 'Ferroviário Maputo', time2: 'Nacala', placar1: '-', placar2: '-' },
     ];
 
     // Agrupar por rodada
@@ -1727,31 +1715,22 @@ export default function App() {
         <View style={styles.searchHeader}>
           <Text style={styles.searchHeaderTitle}>Partidas</Text>
         </View>
-        <ScrollView style={styles.partidasScroll}>
+        <ScrollView>
           {Object.keys(partidasPorRodada).sort((a, b) => b - a).map((rodada) => (
             <View key={rodada} style={styles.rodadaContainer}>
               <Text style={styles.rodadaTitle}>RODADA {rodada}</Text>
               {partidasPorRodada[rodada].map((partida, index) => (
                 <View key={index} style={styles.jogoCard}>
                   <View style={styles.jogoHeader}>
-                    <View style={styles.jogoDateTime}>
-                      <Ionicons name="calendar-outline" size={14} color="#228B22" />
-                      <Text style={styles.jogoData}>{partida.data}</Text>
-                    </View>
-                    <View style={styles.jogoDateTime}>
-                      <Ionicons name="time-outline" size={14} color="#DC143C" />
-                      <Text style={styles.jogoHora}>{partida.hora}</Text>
-                    </View>
+                    <Text style={styles.jogoData}>{partida.data} • {partida.hora}</Text>
                   </View>
                   <View style={styles.jogoTimes}>
                     <View style={styles.jogoTime}>
-                      <Text style={styles.timeEscudo}>{partida.escudo1}</Text>
                       <Text style={styles.timeNome}>{partida.time1}</Text>
                       <Text style={styles.jogoPlacar}>{partida.placar1}</Text>
                     </View>
                     <Text style={styles.jogoVs}>VS</Text>
                     <View style={styles.jogoTime}>
-                      <Text style={styles.timeEscudo}>{partida.escudo2}</Text>
                       <Text style={styles.timeNome}>{partida.time2}</Text>
                       <Text style={styles.jogoPlacar}>{partida.placar2}</Text>
                     </View>
@@ -2725,49 +2704,37 @@ const styles = StyleSheet.create({
     color: '#DC143C',
   },
   // Estilos para Partidas
-  partidasScroll: {
-    flex: 1,
-    backgroundColor: '#1a1a1a',
-    padding: 15,
-  },
   rodadaContainer: {
     marginBottom: 25,
+    paddingHorizontal: 15,
   },
   rodadaTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#228B22',
     marginBottom: 12,
     letterSpacing: 1,
   },
   jogoCard: {
-    backgroundColor: '#2a2a2a',
+    backgroundColor: '#fff',
     borderRadius: 12,
     padding: 15,
     marginBottom: 10,
     borderLeftWidth: 4,
     borderLeftColor: '#228B22',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   jogoHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 12,
-    gap: 12,
-  },
-  jogoDateTime: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
   },
   jogoData: {
     fontSize: 14,
     fontWeight: '600',
     color: '#228B22',
-  },
-  jogoHora: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#DC143C',
   },
   jogoTimes: {
     flexDirection: 'row',
@@ -2779,15 +2746,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  timeEscudo: {
-    fontSize: 32,
-    marginBottom: 5,
-  },
   timeNome: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '600',
-    color: '#fff',
+    color: '#1a1a1a',
     textAlign: 'center',
+    marginBottom: 4,
   },
   jogoVs: {
     fontSize: 14,
@@ -2798,7 +2762,7 @@ const styles = StyleSheet.create({
   jogoPlacar: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FFD700',
+    color: '#DC143C',
     marginTop: 4,
   },
   // Team styles
@@ -2855,5 +2819,48 @@ const styles = StyleSheet.create({
   teamActions: {
     flexDirection: 'row',
     gap: 10,
+  },
+  // Table styles
+  tableContainer: {
+    padding: 15,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#228B22',
+    padding: 10,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  tableHeaderText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+    textAlign: 'center',
+    minWidth: 30,
+  },
+  tableTeamColumn: {
+    minWidth: 120,
+    flex: 0,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  tableCell: {
+    fontSize: 12,
+    color: '#1a1a1a',
+    textAlign: 'center',
+    minWidth: 30,
+  },
+  tableTeamName: {
+    textAlign: 'left',
+    fontWeight: '600',
+  },
+  tablePoints: {
+    fontWeight: 'bold',
+    color: '#228B22',
   },
 });
