@@ -13,13 +13,11 @@ echo   PASSO 1: ATUALIZAR BACKEND NO RENDER
 echo ═══════════════════════════════════════════════════════════
 echo.
 echo Adicionando mudanças ao Git...
-git add .gitignore backend/main.py backend/uploads/*.jpg 2>nul
-git add EXECUTAR_DEPLOY.bat PUBLICAR_EXPO_AGORA.bat 2>nul
-git add DEPLOY_AGORA_IMAGENS.txt 2>nul
+git add . 2>nul
 
 echo.
 echo Fazendo commit...
-git commit -m "Fix: Permitir uploads e adicionar artigos com fotos" 2>nul
+git commit -m "Add: Todos os artigos e scripts de importacao" 2>nul
 
 echo.
 echo Fazendo push para GitHub...
@@ -73,7 +71,7 @@ echo.
 echo Publicando atualização no Expo...
 echo.
 
-eas update --branch preview --message "Fix: Forçar uso do Render e artigos com imagens"
+eas update --branch preview --message "Add: Render URL forçada e todos os artigos"
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
@@ -105,9 +103,9 @@ echo.
 echo 1. Aguarde ~5 min para o Render fazer deploy
 echo.
 echo 2. Acesse: https://futmz.onrender.com/docs
-echo    → Procure "POST /api/setup"
-echo    → "Try it out" → "Execute"
-echo    (Isso cria o admin E os 3 artigos!)
+   echo    → Procure "POST /api/setup"
+   echo    → "Try it out" → "Execute"
+   echo    (Isso cria o admin e artigos!)
 echo.
 echo 3. No celular:
 echo    - Abra o Expo Go

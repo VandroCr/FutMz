@@ -1,0 +1,58 @@
+═══════════════════════════════════════════════════════════════
+       🚀 COMO PUBLICAR NO EXPO
+═══════════════════════════════════════════════════════════════
+
+EXECUTE: PUBLICAR_EXPO_AGORA.bat
+
+Esse script faz TUDO automaticamente:
+1. Atualiza backend no GitHub
+2. Publica app no Expo
+
+═══════════════════════════════════════════════════════════════
+
+SE NÃO FUNCIONAR:
+
+Opção 1 - Manual no CMD:
+1. Abra CMD na pasta FutMz
+2. Execute:
+   eas login
+   eas update --branch preview --message "Add: Render e artigos"
+
+Opção 2 - PowerShell:
+1. Abra PowerShell
+2. Execute:
+   cd FutMz
+   eas login
+   eas update --branch preview
+
+═══════════════════════════════════════════════════════════════
+
+SE DER ERRO "eas não encontrado":
+
+Execute:
+   npm install -g eas-cli
+
+Depois:
+   eas login
+   eas update --branch preview
+
+═══════════════════════════════════════════════════════════════
+
+DEPOIS DE PUBLICAR:
+
+1. Aguarde ~5 minutos para o Render fazer deploy
+
+2. Execute /api/setup em:
+   https://futmz.onrender.com/docs
+
+3. No celular:
+   - Abra Expo Go
+   - Puxe para baixo para atualizar
+   - Artigos devem aparecer!
+
+═══════════════════════════════════════════════════════════════
+
+Execute AGORA: PUBLICAR_EXPO_AGORA.bat
+
+═══════════════════════════════════════════════════════════════
+
