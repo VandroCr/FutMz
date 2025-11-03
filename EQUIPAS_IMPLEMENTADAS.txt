@@ -1,0 +1,46 @@
+═══════════════════════════════════════════════════════════════
+     ✅ CRUD DE EQUIPAS IMPLEMENTADO COM SUCESSO!
+═══════════════════════════════════════════════════════════════
+
+🎉 Funcionalidades Adicionadas:
+
+✅ Modelo de dados Team no backend
+✅ API REST completa para equipas:
+   - GET /api/teams/ - Listar todas
+   - GET /api/teams/{id} - Buscar específica
+   - POST /api/teams/ - Criar (admin)
+   - PUT /api/teams/{id} - Atualizar (admin)
+   - DELETE /api/teams/{id} - Deletar (admin)
+
+✅ Upload de logotipos:
+   - Imagem 1:1 (quadrada)
+   - Pré-visualização antes de salvar
+   - Remoção de logo
+
+✅ Interface no app:
+   - Botão "Gerenciar Equipas" na aba Perfil
+   - Formulário de criação
+   - Formulário de edição
+   - Lista de equipas cadastradas
+   - Botões de editar/excluir
+
+═══════════════════════════════════════════════════════════════
+              🚀 COMO USAR
+═══════════════════════════════════════════════════════════════
+
+1. Login como admin no app
+2. Vá em "Perfil"
+3. Clique em "Gerenciar Equipas"
+4. Cadastre suas equipas com logotipos!
+
+═══════════════════════════════════════════════════════════════
+              📝 PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════════════
+
+Agora você pode:
+- Cadastrar todas as equipas moçambicanas
+- Associar equipas às partidas na aba "Partidas"
+- Usar logotipos nas exibições
+
+═══════════════════════════════════════════════════════════════
+
