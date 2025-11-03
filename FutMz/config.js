@@ -1,17 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform } from 'react-native';
-
-// URL da API - ajustar conforme necessário
-// IMPORTANTE: Substitua SEU_IP_AQUI pelo IP da sua máquina na rede Wi-Fi
-// Para descobrir: Windows (ipconfig) | Mac/Linux (ifconfig)
-// Para web, usa localhost, para mobile usa o IP da rede Wi-Fi
-const DEV_API_URL = Platform.OS === 'web' 
-  ? 'http://localhost:8000/api' 
-  : 'http://192.168.43.171:8000/api'; // IP da sua máquina na rede Wi-Fi
-
-const DEV_SERVER_URL = Platform.OS === 'web'
-  ? 'http://localhost:8000'
-  : 'http://192.168.43.171:8000'; // IP da sua máquina na rede Wi-Fi
 
 export const API_URL = 'https://futmz.onrender.com/api'; // URL de produção no Render
 
