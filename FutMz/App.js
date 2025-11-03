@@ -29,6 +29,10 @@ export default function App() {
   // Table tabs state
   const [activeTableTab, setActiveTableTab] = useState('classificacao'); // 'classificacao' or 'artilheiros'
   
+  // Tabela e artilheiros state
+  const [classificacao, setClassificacao] = useState([]);
+  const [artilheiros, setArtilheiros] = useState([]);
+  
   // Login state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -94,7 +98,51 @@ export default function App() {
   // Carregar foto do header ao iniciar o app
   useEffect(() => {
     loadHeaderImage();
+    loadInitialTableData();
   }, []);
+
+  const loadInitialTableData = () => {
+    // Dados iniciais da classificação
+    const initialClassificacao = [
+      { pos: 1, equipa: 'UD Songo', j: 18, v: 15, e: 2, d: 1, gm: 40, gs: 10, dg: 30, pts: 47, dp: 0, highlight: '#d4edda' },
+      { pos: 2, equipa: 'Ferroviário Beira', j: 19, v: 8, e: 6, d: 5, gm: 16, gs: 12, dg: 4, pts: 30, dp: 17 },
+      { pos: 3, equipa: 'Black Bulls', j: 15, v: 8, e: 3, d: 4, gm: 24, gs: 17, dg: 7, pts: 27, dp: 3 },
+      { pos: 4, equipa: 'Costa do Sol', j: 18, v: 6, e: 9, d: 3, gm: 15, gs: 11, dg: 4, pts: 27, dp: 0 },
+      { pos: 5, equipa: 'Ferroviário Lichinga', j: 18, v: 7, e: 6, d: 5, gm: 30, gs: 27, dg: 3, pts: 27, dp: 0 },
+      { pos: 6, equipa: 'Ferroviário Maputo', j: 16, v: 5, e: 10, d: 1, gm: 19, gs: 11, dg: 8, pts: 25, dp: 2 },
+      { pos: 7, equipa: 'Ferroviário Nacala', j: 19, v: 6, e: 7, d: 6, gm: 13, gs: 14, dg: -1, pts: 25, dp: 0 },
+      { pos: 8, equipa: 'Bala de Pemba', j: 19, v: 6, e: 6, d: 7, gm: 18, gs: 17, dg: 1, pts: 24, dp: 1 },
+      { pos: 9, equipa: 'Chingale Tete', j: 17, v: 4, e: 8, d: 5, gm: 12, gs: 15, dg: -3, pts: 20, dp: 4 },
+      { pos: 10, equipa: 'AD Vilankulo', j: 16, v: 4, e: 6, d: 6, gm: 15, gs: 18, dg: -3, pts: 18, dp: 2 },
+      { pos: 11, equipa: 'Textafrica Chimolo', j: 18, v: 3, e: 7, d: 8, gm: 11, gs: 21, dg: -10, pts: 16, dp: 2 },
+      { pos: 12, equipa: 'Ferroviário Nampula', j: 17, v: 3, e: 7, d: 7, gm: 13, gs: 24, dg: -11, pts: 16, dp: 0 },
+      { pos: 13, equipa: 'Desportivo Nacala', j: 17, v: 3, e: 5, d: 9, gm: 13, gs: 24, dg: -11, pts: 14, dp: 2, highlight: '#f8d7da' },
+      { pos: 14, equipa: 'Desportivo Matola', j: 17, v: 1, e: 4, d: 12, gm: 9, gs: 27, dg: -18, pts: 7, dp: 7, highlight: '#f8d7da' },
+    ];
+
+    // Dados iniciais dos artilheiros
+    const initialArtilheiros = [
+      { pos: 1, jogador: 'Miquissone L.', equipe: 'UD Songo', gols: 10 },
+      { pos: 2, jogador: 'Chester Y.', equipe: 'UD Songo', gols: 9 },
+      { pos: 3, jogador: 'Tomas T. A. M.', equipe: 'ENH Vilankulo', gols: 8 },
+      { pos: 4, jogador: 'Cantolo A.', equipe: 'Chingale de Tete', gols: 6 },
+      { pos: 4, jogador: 'Mario I.', equipe: 'Ferroviario Lichinga', gols: 6 },
+      { pos: 4, jogador: 'Reis A.', equipe: 'UD Songo', gols: 6 },
+      { pos: 4, jogador: 'Tesoura Junior V. J.', equipe: 'UD Songo', gols: 6 },
+      { pos: 8, jogador: 'Abdulkarim Y.', equipe: 'Ferroviario Nampula', gols: 5 },
+      { pos: 8, jogador: 'Antonio D.', equipe: 'Ferroviario Beira', gols: 5 },
+      { pos: 8, jogador: 'Calisto C.', equipe: 'Ferroviário Maputo', gols: 5 },
+      { pos: 8, jogador: 'Carvalho I.', equipe: 'Baia de Pemba', gols: 5 },
+      { pos: 8, jogador: 'Hammed', equipe: 'Black Bulls', gols: 5 },
+      { pos: 8, jogador: 'Saide M.', equipe: 'Ferroviario Lichinga', gols: 5 },
+      { pos: 14, jogador: 'Brezzy B', equipe: 'Ferroviario Lichinga', gols: 4 },
+      { pos: 14, jogador: 'Cherene O.', equipe: 'UD Songo', gols: 4 },
+      { pos: 14, jogador: 'Cipriano S.', equipe: 'Baia de Pemba', gols: 4 },
+    ];
+
+    setClassificacao(initialClassificacao);
+    setArtilheiros(initialArtilheiros);
+  };
 
   // Solicitar permissão para acessar a câmera/galeria
   useEffect(() => {
@@ -1630,44 +1678,6 @@ export default function App() {
 
   // Render Search Screen Component (Tabela)
   const renderSearchScreen = () => {
-    // Dados da classificação
-    const classificacao = [
-      { pos: 1, equipa: 'UD Songo', j: 18, v: 15, e: 2, d: 1, gm: 40, gs: 10, dg: 30, pts: 47, dp: 0, highlight: '#d4edda' },
-      { pos: 2, equipa: 'Ferroviário Beira', j: 19, v: 8, e: 6, d: 5, gm: 16, gs: 12, dg: 4, pts: 30, dp: 17 },
-      { pos: 3, equipa: 'Black Bulls', j: 15, v: 8, e: 3, d: 4, gm: 24, gs: 17, dg: 7, pts: 27, dp: 3 },
-      { pos: 4, equipa: 'Costa do Sol', j: 18, v: 6, e: 9, d: 3, gm: 15, gs: 11, dg: 4, pts: 27, dp: 0 },
-      { pos: 5, equipa: 'Ferroviário Lichinga', j: 18, v: 7, e: 6, d: 5, gm: 30, gs: 27, dg: 3, pts: 27, dp: 0 },
-      { pos: 6, equipa: 'Ferroviário Maputo', j: 16, v: 5, e: 10, d: 1, gm: 19, gs: 11, dg: 8, pts: 25, dp: 2 },
-      { pos: 7, equipa: 'Ferroviário Nacala', j: 19, v: 6, e: 7, d: 6, gm: 13, gs: 14, dg: -1, pts: 25, dp: 0 },
-      { pos: 8, equipa: 'Bala de Pemba', j: 19, v: 6, e: 6, d: 7, gm: 18, gs: 17, dg: 1, pts: 24, dp: 1 },
-      { pos: 9, equipa: 'Chingale Tete', j: 17, v: 4, e: 8, d: 5, gm: 12, gs: 15, dg: -3, pts: 20, dp: 4 },
-      { pos: 10, equipa: 'AD Vilankulo', j: 16, v: 4, e: 6, d: 6, gm: 15, gs: 18, dg: -3, pts: 18, dp: 2 },
-      { pos: 11, equipa: 'Textafrica Chimolo', j: 18, v: 3, e: 7, d: 8, gm: 11, gs: 21, dg: -10, pts: 16, dp: 2 },
-      { pos: 12, equipa: 'Ferroviário Nampula', j: 17, v: 3, e: 7, d: 7, gm: 13, gs: 24, dg: -11, pts: 16, dp: 0 },
-      { pos: 13, equipa: 'Desportivo Nacala', j: 17, v: 3, e: 5, d: 9, gm: 13, gs: 24, dg: -11, pts: 14, dp: 2, highlight: '#f8d7da' },
-      { pos: 14, equipa: 'Desportivo Matola', j: 17, v: 1, e: 4, d: 12, gm: 9, gs: 27, dg: -18, pts: 7, dp: 7, highlight: '#f8d7da' },
-    ];
-
-    // Dados dos artilheiros
-    const artilheiros = [
-      { pos: 1, jogador: 'Miquissone L.', equipe: 'UD Songo', gols: 10 },
-      { pos: 2, jogador: 'Chester Y.', equipe: 'UD Songo', gols: 9 },
-      { pos: 3, jogador: 'Tomas T. A. M.', equipe: 'ENH Vilankulo', gols: 8 },
-      { pos: 4, jogador: 'Cantolo A.', equipe: 'Chingale de Tete', gols: 6 },
-      { pos: 4, jogador: 'Mario I.', equipe: 'Ferroviario Lichinga', gols: 6 },
-      { pos: 4, jogador: 'Reis A.', equipe: 'UD Songo', gols: 6 },
-      { pos: 4, jogador: 'Tesoura Junior V. J.', equipe: 'UD Songo', gols: 6 },
-      { pos: 8, jogador: 'Abdulkarim Y.', equipe: 'Ferroviario Nampula', gols: 5 },
-      { pos: 8, jogador: 'Antonio D.', equipe: 'Ferroviario Beira', gols: 5 },
-      { pos: 8, jogador: 'Calisto C.', equipe: 'Ferroviário Maputo', gols: 5 },
-      { pos: 8, jogador: 'Carvalho I.', equipe: 'Baia de Pemba', gols: 5 },
-      { pos: 8, jogador: 'Hammed', equipe: 'Black Bulls', gols: 5 },
-      { pos: 8, jogador: 'Saide M.', equipe: 'Ferroviario Lichinga', gols: 5 },
-      { pos: 14, jogador: 'Brezzy B', equipe: 'Ferroviario Lichinga', gols: 4 },
-      { pos: 14, jogador: 'Cherene O.', equipe: 'UD Songo', gols: 4 },
-      { pos: 14, jogador: 'Cipriano S.', equipe: 'Baia de Pemba', gols: 4 },
-    ];
-
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
@@ -1726,10 +1736,23 @@ export default function App() {
                     <Text style={styles.tableCell}>{item.gs}</Text>
                     <Text style={styles.tableCell}>{item.dg}</Text>
                     <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
+                    {isAdmin && (
+                      <TouchableOpacity style={styles.tableActionButton}>
+                        <Ionicons name="pencil" size={16} color="#228B22" />
+                      </TouchableOpacity>
+                    )}
                   </View>
                 ))}
               </View>
             </ScrollView>
+            {isAdmin && (
+              <View style={styles.tableAdminContainer}>
+                <TouchableOpacity style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}>
+                  <Ionicons name="add-circle-outline" size={20} color="#fff" />
+                  <Text style={styles.buttonText}> Adicionar Equipa</Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <View style={styles.legendContainer}>
               <Text style={styles.legendTitle}>Notas da classificação</Text>
               <View style={styles.legendItem}>
@@ -1760,9 +1783,22 @@ export default function App() {
                   <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.jogador}</Text>
                   <Text style={[styles.tableCell, styles.tableTeamColumn]}>{item.equipe}</Text>
                   <Text style={[styles.tableCell, styles.tablePoints]}>{item.gols}</Text>
+                  {isAdmin && (
+                    <TouchableOpacity style={styles.tableActionButton}>
+                      <Ionicons name="pencil" size={16} color="#228B22" />
+                    </TouchableOpacity>
+                  )}
                 </View>
               ))}
             </View>
+            {isAdmin && (
+              <View style={styles.tableAdminContainer}>
+                <TouchableOpacity style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}>
+                  <Ionicons name="add-circle-outline" size={20} color="#fff" />
+                  <Text style={styles.buttonText}> Adicionar Artilheiro</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </ScrollView>
         )}
       </View>
@@ -3063,5 +3099,14 @@ const styles = StyleSheet.create({
   legendText: {
     fontSize: 14,
     color: '#1a1a1a',
+  },
+  tableActionButton: {
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+  },
+  tableAdminContainer: {
+    marginTop: 10,
   },
 });
