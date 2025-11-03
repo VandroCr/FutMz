@@ -1687,6 +1687,17 @@ export default function App() {
             ))}
           </View>
         </ScrollView>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legendTitle}>Notas da classificação</Text>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendSquare, styles.legendSquareGreen]} />
+            <Text style={styles.legendText}>CAF Champions League</Text>
+          </View>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendSquare, styles.legendSquareRed]} />
+            <Text style={styles.legendText}>Despromoção</Text>
+          </View>
+        </View>
       </View>
     );
   };
@@ -2874,5 +2885,36 @@ const styles = StyleSheet.create({
   tablePoints: {
     fontWeight: 'bold',
     color: '#228B22',
+  },
+  legendContainer: {
+    padding: 15,
+  },
+  legendTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  legendSquare: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+    borderRadius: 4,
+  },
+  legendSquareGreen: {
+    backgroundColor: '#d4edda',
+  },
+  legendSquareRed: {
+    backgroundColor: '#f8d7da',
+  },
+  legendText: {
+    fontSize: 14,
+    color: '#1a1a1a',
   },
 });
