@@ -1355,42 +1355,69 @@ export default function App() {
   };
 
   // Render Ideas Screen Component (Partidas)
-  const renderIdeasScreen = () => (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <View style={styles.searchHeader}>
-        <Text style={styles.searchHeaderTitle}>Partidas</Text>
-      </View>
-      <ScrollView>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Todos os Artigos</Text>
-          {articles.length === 0 ? (
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>Nenhum artigo disponível ainda</Text>
-            </View>
-          ) : (
-            articles.map((item) => (
-              <View key={item.id} style={styles.articleCard}>
-                <TouchableOpacity onPress={() => openArticle(item)}>
-                  <View style={styles.imageContainer}>
-                    {item.image_url && (
-                      <Image source={{ uri: item.image_url }} style={styles.articleImage} />
-                    )}
-                  </View>
-                  <View style={styles.articleContent}>
-                    <Text style={styles.articleTitle} numberOfLines={2}>{item.title}</Text>
-                    {item.excerpt && (
-                      <Text style={styles.articleExcerpt} numberOfLines={2}>{item.excerpt}</Text>
-                    )}
-                  </View>
-                </TouchableOpacity>
-              </View>
-            ))
-          )}
+  const renderIdeasScreen = () => {
+    // Dados das partidas
+    const partidas = [
+      { rodada: 16, data: '05.11', hora: '15:00', time1: 'UD Songo', escudo1: '🏅', time2: 'Ferroviário Maputo', escudo2: '🚂', placar1: '-', placar2: '-' },
+      { rodada: 10, data: '06.11', hora: '15:00', time1: 'Black Bulls', escudo1: '🐂', time2: 'ENH Vilankulo', escudo2: '🌊', placar1: '-', placar2: '-' },
+      { rodada: 18, data: '09.11', hora: '14:45', time1: 'Textafrica', escudo1: '📰', time2: 'Ferroviário Maputo', escudo2: '🚂', placar1: '-', placar2: '-' },
+      { rodada: 19, data: '09.11', hora: '15:00', time1: 'ENH Vilankulo', escudo1: '🌊', time2: 'Nacala', escudo2: '⚓', placar1: '-', placar2: '-' },
+      { rodada: 17, data: '09.11', hora: '16:00', time1: 'Costa do Sol', escudo1: '☀️', time2: 'Black Bulls', escudo2: '🐂', placar1: '-', placar2: '-' },
+      { rodada: 17, data: '12.11', hora: '15:00', time1: 'Ferroviário Maputo', escudo1: '🚂', time2: 'Nacala', escudo2: '⚓', placar1: '-', placar2: '-' },
+    ];
+
+    // Agrupar por rodada
+    const partidasPorRodada = {};
+    partidas.forEach(partida => {
+      if (!partidasPorRodada[partida.rodada]) {
+        partidasPorRodada[partida.rodada] = [];
+      }
+      partidasPorRodada[partida.rodada].push(partida);
+    });
+
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <View style={styles.searchHeader}>
+          <Text style={styles.searchHeaderTitle}>Partidas</Text>
         </View>
-      </ScrollView>
-    </View>
-  );
+        <ScrollView style={styles.partidasScroll}>
+          {Object.keys(partidasPorRodada).sort((a, b) => b - a).map((rodada) => (
+            <View key={rodada} style={styles.rodadaContainer}>
+              <Text style={styles.rodadaTitle}>RODADA {rodada}</Text>
+              {partidasPorRodada[rodada].map((partida, index) => (
+                <View key={index} style={styles.jogoCard}>
+                  <View style={styles.jogoHeader}>
+                    <View style={styles.jogoDateTime}>
+                      <Ionicons name="calendar-outline" size={14} color="#228B22" />
+                      <Text style={styles.jogoData}>{partida.data}</Text>
+                    </View>
+                    <View style={styles.jogoDateTime}>
+                      <Ionicons name="time-outline" size={14} color="#DC143C" />
+                      <Text style={styles.jogoHora}>{partida.hora}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.jogoTimes}>
+                    <View style={styles.jogoTime}>
+                      <Text style={styles.timeEscudo}>{partida.escudo1}</Text>
+                      <Text style={styles.timeNome}>{partida.time1}</Text>
+                      <Text style={styles.jogoPlacar}>{partida.placar1}</Text>
+                    </View>
+                    <Text style={styles.jogoVs}>VS</Text>
+                    <View style={styles.jogoTime}>
+                      <Text style={styles.timeEscudo}>{partida.escudo2}</Text>
+                      <Text style={styles.timeNome}>{partida.time2}</Text>
+                      <Text style={styles.jogoPlacar}>{partida.placar2}</Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    );
+  };
 
   // Render Favorites Screen Component
   const renderFavoritesScreen = () => {
@@ -2345,5 +2372,82 @@ const styles = StyleSheet.create({
   },
   logoutProfileButtonText: {
     color: '#DC143C',
+  },
+  // Estilos para Partidas
+  partidasScroll: {
+    flex: 1,
+    backgroundColor: '#1a1a1a',
+    padding: 15,
+  },
+  rodadaContainer: {
+    marginBottom: 25,
+  },
+  rodadaTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 12,
+    letterSpacing: 1,
+  },
+  jogoCard: {
+    backgroundColor: '#2a2a2a',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 10,
+    borderLeftWidth: 4,
+    borderLeftColor: '#228B22',
+  },
+  jogoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    gap: 12,
+  },
+  jogoDateTime: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  jogoData: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#228B22',
+  },
+  jogoHora: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#DC143C',
+  },
+  jogoTimes: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 5,
+  },
+  jogoTime: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  timeEscudo: {
+    fontSize: 32,
+    marginBottom: 5,
+  },
+  timeNome: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  jogoVs: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#999',
+    marginHorizontal: 10,
+  },
+  jogoPlacar: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFD700',
+    marginTop: 4,
   },
 });
