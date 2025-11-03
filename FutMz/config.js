@@ -15,12 +15,12 @@ const DEV_SERVER_URL = Platform.OS === 'web'
 
 export const API_URL = __DEV__ 
   ? DEV_API_URL
-  : 'https://seu-dominio.com/api'; // Para produção
+  : 'https://futmz.onrender.com/api'; // Produção no Render
 
 // URL base do servidor (sem /api)
 export const SERVER_URL = __DEV__ 
   ? DEV_SERVER_URL
-  : 'https://seu-dominio.com'; // Para produção
+  : 'https://futmz.onrender.com'; // Produção no Render
 
 export const STORAGE_KEYS = {
   AUTH_TOKEN: '@FutMz:auth_token',
