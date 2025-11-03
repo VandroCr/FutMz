@@ -94,3 +94,22 @@ class FavoriteResponse(BaseModel):
     created_at: datetime
     
     model_config = ConfigDict(from_attributes=True)
+
+# Team Schemas
+class TeamBase(BaseModel):
+    name: str
+    logo_url: Optional[str] = None
+
+class TeamCreate(TeamBase):
+    pass
+
+class TeamUpdate(BaseModel):
+    name: Optional[str] = None
+    logo_url: Optional[str] = None
+
+class TeamResponse(TeamBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+    
+    model_config = ConfigDict(from_attributes=True)

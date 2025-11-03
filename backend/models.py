@@ -70,3 +70,12 @@ class Favorite(Base):
     # Relacionamentos
     user = relationship("User", back_populates="favorites")
     article = relationship("Article", back_populates="favorites")
+
+class Team(Base):
+    __tablename__ = "teams"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False, unique=True)
+    logo_url = Column(String(500))
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

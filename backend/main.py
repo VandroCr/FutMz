@@ -6,7 +6,7 @@ import uvicorn
 import os
 
 from database import init_db
-from routers import auth, articles, comments, favorites, users
+from routers import auth, articles, comments, favorites, users, teams
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -48,6 +48,7 @@ app.include_router(articles.router, prefix="/api", tags=["Artigos"])
 app.include_router(comments.router, prefix="/api", tags=["Comentários"])
 app.include_router(favorites.router, prefix="/api", tags=["Favoritos"])
 app.include_router(users.router, prefix="/api", tags=["Usuários"])
+app.include_router(teams.router, prefix="/api/teams", tags=["Equipas"])
 
 @app.get("/")
 async def root():
