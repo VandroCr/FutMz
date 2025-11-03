@@ -1,9 +1,26 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
-export const API_URL = 'https://futmz.onrender.com/api'; // URL de produção no Render
+// URL da API - ajustar conforme necessário
+// IMPORTANTE: Substitua SEU_IP_AQUI pelo IP da sua máquina na rede Wi-Fi
+// Para descobrir: Windows (ipconfig) | Mac/Linux (ifconfig)
+// Para web, usa localhost, para mobile usa o IP da rede Wi-Fi
+const DEV_API_URL = Platform.OS === 'web' 
+  ? 'http://localhost:8000/api' 
+  : 'http://192.168.43.171:8000/api'; // IP da sua máquina na rede Wi-Fi
+
+const DEV_SERVER_URL = Platform.OS === 'web'
+  ? 'http://localhost:8000'
+  : 'http://192.168.43.171:8000'; // IP da sua máquina na rede Wi-Fi
+
+export const API_URL = __DEV__ 
+  ? DEV_API_URL
+  : 'https://futmz.onrender.com/api'; // Produção no Render
 
 // URL base do servidor (sem /api)
-export const SERVER_URL = 'https://futmz.onrender.com'; // URL de produção no Render
+export const SERVER_URL = __DEV__ 
+  ? DEV_SERVER_URL
+  : 'https://futmz.onrender.com'; // Produção no Render
 
 export const STORAGE_KEYS = {
   AUTH_TOKEN: '@FutMz:auth_token',
