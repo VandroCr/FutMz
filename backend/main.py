@@ -104,6 +104,7 @@ async def setup_database():
                 "excerpt": "Dando seguimento à visita de trabalho à Província da Zambezia, a delegação liderada pelo Presidente da Federação Moçambicana de Futebol, Feizal Sidat, procedeu à entrega de 1200 bolas de futebol a 22 associações distritais da província.",
                 "content": "Dando seguimento à visita de trabalho à Província da Zambezia, a delegação liderada pelo Presidente da Federação Moçambicana de Futebol, Feizal Sidat, procedeu à entrega de 1200 bolas de futebol a 22 associações distritais da província.\n\nEste importante gesto visa massificar ainda mais o futebol na região, fornecendo material desportivo essencial para o desenvolvimento das categorias de base e o crescimento do futebol local.\n\nAs associações beneficiadas agradeceram a iniciativa e se comprometeram a utilizar adequadamente o material recebido para a promoção e desenvolvimento do futebol nas suas respectivas áreas de atuação.",
                 "category": "Nacional",
+                "image_url": "https://futmz.onrender.com/uploads/0a710882-1291-44af-aed4-70457ad8a086.jpg",
                 "published": True,
                 "featured": True,
                 "author_id": admin.id
@@ -114,6 +115,7 @@ async def setup_database():
                 "excerpt": "De 28 a 30 de Outubro, a CAF e a FMF realizam o Workshop de Segurança e Protecção no âmbito da Safe Stadium Initiative.",
                 "content": "De 28 a 30 de Outubro, a CAF e a FMF realizam o Workshop de Segurança e Protecção no âmbito da Safe Stadium Initiative - uma missão com um objectivo claro: ZERO mortes em jogos de futebol em África! ⚽\n\nO evento reunirá especialistas em segurança desportiva, autoridades locais e representantes de clubes para discutir e implementar medidas de segurança nos estádios moçambicanos.\n\nEste workshop faz parte de uma iniciativa continental da CAF para garantir que os jogos de futebol sejam eventos seguros e agradáveis para todos os espectadores.",
                 "category": "Nacional",
+                "image_url": "https://futmz.onrender.com/uploads/0e3195d1-1a71-47f0-9e6c-e5cba25cd413.jpg",
                 "published": True,
                 "featured": True,
                 "author_id": admin.id
@@ -124,6 +126,7 @@ async def setup_database():
                 "excerpt": "Chiquinho Conde divulga pré-convocatória dos Mambas para a data FIFA de Novembro",
                 "content": "O selecionador nacional, Chiquinho Conde, divulgou a pré-convocatória dos Mambas para a próxima data FIFA de Novembro.\n\nA lista inclui jogadores que estão a destacar-se tanto no campeonato nacional como em ligas internacionais.\n\nOs convocados iniciarão os trabalhos de preparação na próxima semana, com foco nos jogos eliminatórios que se aproximam.",
                 "category": "Nacional",
+                "image_url": "https://futmz.onrender.com/uploads/13d9f66c-c013-4984-9086-33c8374c7bee.jpg",
                 "published": True,
                 "featured": False,
                 "author_id": admin.id
