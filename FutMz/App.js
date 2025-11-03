@@ -953,6 +953,137 @@ export default function App() {
     setScreen('teams');
   };
 
+  // Table and Artilheiros CRUD Functions
+  const startEditClassificacao = (item, field) => {
+    const fieldLabels = {
+      'equipa': 'Nome da Equipa',
+      'j': 'Jogos',
+      'v': 'Vitórias',
+      'e': 'Empates',
+      'd': 'Derrotas',
+      'gm': 'Gols Marcados',
+      'gs': 'Gols Sofridos',
+      'dg': 'Diferença de Gols',
+      'pts': 'Pontos'
+    };
+
+    Alert.prompt(
+      'Editar',
+      `Novo valor para ${fieldLabels[field]}:`,
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Salvar',
+          onPress: (newValue) => {
+            if (newValue !== null && newValue !== undefined) {
+              setClassificacao(prev => prev.map(i => 
+                i.pos === item.pos 
+                  ? { ...i, [field]: isNaN(newValue) ? newValue : Number(newValue) }
+                  : i
+              ));
+            }
+          }
+        }
+      ],
+      'plain-text',
+      String(item[field])
+    );
+  };
+
+  const startEditArtilheiro = (item, field) => {
+    const fieldLabels = {
+      'jogador': 'Nome do Jogador',
+      'equipe': 'Nome da Equipa',
+      'gols': 'Gols'
+    };
+
+    Alert.prompt(
+      'Editar',
+      `Novo valor para ${fieldLabels[field]}:`,
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Salvar',
+          onPress: (newValue) => {
+            if (newValue !== null && newValue !== undefined) {
+              setArtilheiros(prev => prev.map((i, idx) => {
+                if (item.pos === i.pos && item.jogador === i.jogador && item.equipe === i.equipe) {
+                  return { ...i, [field]: isNaN(newValue) ? newValue : Number(newValue) };
+                }
+                return i;
+              }).sort((a, b) => {
+                if (b.gols !== a.gols) return b.gols - a.gols;
+                return a.pos - b.pos;
+              }));
+            }
+          }
+        }
+      ],
+      'plain-text',
+      String(item[field])
+    );
+  };
+
+  const handleDeleteClassificacao = (pos) => {
+    Alert.alert(
+      'Confirmar exclusão',
+      'Tem certeza que deseja excluir esta equipa da classificação?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: () => {
+            setClassificacao(prev => prev.filter(item => item.pos !== pos));
+          }
+        }
+      ]
+    );
+  };
+
+  const handleDeleteArtilheiro = (index) => {
+    Alert.alert(
+      'Confirmar exclusão',
+      'Tem certeza que deseja excluir este artilheiro?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: () => {
+            setArtilheiros(prev => prev.filter((_, idx) => idx !== index));
+          }
+        }
+      ]
+    );
+  };
+
+  const handleAddClassificacao = () => {
+    const newPos = classificacao.length + 1;
+    setClassificacao(prev => [...prev, {
+      pos: newPos,
+      equipa: 'Nova Equipa',
+      j: 0,
+      v: 0,
+      e: 0,
+      d: 0,
+      gm: 0,
+      gs: 0,
+      dg: 0,
+      pts: 0,
+      dp: 0,
+    }]);
+  };
+
+  const handleAddArtilheiro = () => {
+    setArtilheiros(prev => [...prev, {
+      pos: prev.length + 1,
+      jogador: 'Novo Jogador',
+      equipe: 'Nova Equipa',
+      gols: 0,
+    }]);
+  };
+
   const renderArticleContent = (content, contentImages = []) => {
     // Dividir o conteúdo por quebras de linha
     const paragraphs = content.split('\n');
@@ -1721,18 +1852,102 @@ export default function App() {
                 {classificacao.map((item) => (
                   <View key={item.pos} style={[styles.tableRow, item.highlight && { backgroundColor: item.highlight }]}>
                     <Text style={styles.tableCell}>{item.pos}</Text>
-                    <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.equipa}</Text>
-                    <Text style={styles.tableCell}>{item.j}</Text>
-                    <Text style={styles.tableCell}>{item.v}</Text>
-                    <Text style={styles.tableCell}>{item.e}</Text>
-                    <Text style={styles.tableCell}>{item.d}</Text>
-                    <Text style={styles.tableCell}>{item.gm}</Text>
-                    <Text style={styles.tableCell}>{item.gs}</Text>
-                    <Text style={styles.tableCell}>{item.dg}</Text>
-                    <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'equipa')}
+                      >
+                        <Text>{item.equipa}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.equipa}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'j')}
+                      >
+                        <Text>{item.j}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.j}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'v')}
+                      >
+                        <Text>{item.v}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.v}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'e')}
+                      >
+                        <Text>{item.e}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.e}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'd')}
+                      >
+                        <Text>{item.d}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.d}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'gm')}
+                      >
+                        <Text>{item.gm}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.gm}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'gs')}
+                      >
+                        <Text>{item.gs}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.gs}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'dg')}
+                      >
+                        <Text>{item.dg}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.tableCell}>{item.dg}</Text>
+                    )}
+                    {isAdmin ? (
+                      <TouchableOpacity 
+                        style={[styles.tableCell, styles.tablePoints, styles.editableCell]}
+                        onPress={() => startEditClassificacao(item, 'pts')}
+                      >
+                        <Text>{item.pts}</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={[styles.tableCell, styles.tablePoints]}>{item.pts}</Text>
+                    )}
                     {isAdmin && (
-                      <TouchableOpacity style={styles.tableActionButton}>
-                        <Ionicons name="pencil" size={16} color="#228B22" />
+                      <TouchableOpacity 
+                        style={styles.tableActionButton}
+                        onPress={() => handleDeleteClassificacao(item.pos)}
+                      >
+                        <Ionicons name="trash" size={16} color="#DC143C" />
                       </TouchableOpacity>
                     )}
                   </View>
@@ -1741,7 +1956,10 @@ export default function App() {
             </ScrollView>
             {isAdmin && (
               <View style={styles.tableAdminContainer}>
-                <TouchableOpacity style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}>
+                <TouchableOpacity 
+                  style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}
+                  onPress={handleAddClassificacao}
+                >
                   <Ionicons name="add-circle-outline" size={20} color="#fff" />
                   <Text style={styles.buttonText}> Adicionar Equipa</Text>
                 </TouchableOpacity>
@@ -1774,12 +1992,42 @@ export default function App() {
               {artilheiros.map((item, index) => (
                 <View key={index} style={styles.tableRow}>
                   <Text style={styles.tableCell}>{item.pos}</Text>
-                  <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.jogador}</Text>
-                  <Text style={[styles.tableCell, styles.tableTeamColumn]}>{item.equipe}</Text>
-                  <Text style={[styles.tableCell, styles.tablePoints]}>{item.gols}</Text>
+                  {isAdmin ? (
+                    <TouchableOpacity 
+                      style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName, styles.editableCell]}
+                      onPress={() => startEditArtilheiro(item, 'jogador')}
+                    >
+                      <Text>{item.jogador}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <Text style={[styles.tableCell, styles.tableTeamColumn, styles.tableTeamName]}>{item.jogador}</Text>
+                  )}
+                  {isAdmin ? (
+                    <TouchableOpacity 
+                      style={[styles.tableCell, styles.tableTeamColumn, styles.editableCell]}
+                      onPress={() => startEditArtilheiro(item, 'equipe')}
+                    >
+                      <Text>{item.equipe}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <Text style={[styles.tableCell, styles.tableTeamColumn]}>{item.equipe}</Text>
+                  )}
+                  {isAdmin ? (
+                    <TouchableOpacity 
+                      style={[styles.tableCell, styles.tablePoints, styles.editableCell]}
+                      onPress={() => startEditArtilheiro(item, 'gols')}
+                    >
+                      <Text>{item.gols}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <Text style={[styles.tableCell, styles.tablePoints]}>{item.gols}</Text>
+                  )}
                   {isAdmin && (
-                    <TouchableOpacity style={styles.tableActionButton}>
-                      <Ionicons name="pencil" size={16} color="#228B22" />
+                    <TouchableOpacity 
+                      style={styles.tableActionButton}
+                      onPress={() => handleDeleteArtilheiro(index)}
+                    >
+                      <Ionicons name="trash" size={16} color="#DC143C" />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -1787,7 +2035,10 @@ export default function App() {
             </View>
             {isAdmin && (
               <View style={styles.tableAdminContainer}>
-                <TouchableOpacity style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}>
+                <TouchableOpacity 
+                  style={[styles.button, { marginHorizontal: 15, marginTop: 10 }]}
+                  onPress={handleAddArtilheiro}
+                >
                   <Ionicons name="add-circle-outline" size={20} color="#fff" />
                   <Text style={styles.buttonText}> Adicionar Artilheiro</Text>
                 </TouchableOpacity>
@@ -3102,5 +3353,8 @@ const styles = StyleSheet.create({
   },
   tableAdminContainer: {
     marginTop: 10,
+  },
+  editableCell: {
+    backgroundColor: '#e8f5e9',
   },
 });
