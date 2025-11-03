@@ -1,0 +1,118 @@
+═══════════════════════════════════════════════════════════════
+       📝 DEPLOY MANUAL NO RENDER - PASSO A PASSO
+═══════════════════════════════════════════════════════════════
+
+Siga ESTAS instruções EXATAS para fazer deploy manual:
+
+═══════════════════════════════════════════════════════════════
+              OPÇÃO 1: VIA GITHUB DESKTOP (MAIS FÁCIL)
+═══════════════════════════════════════════════════════════════
+
+1️⃣ INSTALAR GITHUB DESKTOP:
+   Baixe: https://desktop.github.com/
+   Instale e faça login com sua conta GitHub
+
+2️⃣ ABRIR O PROJETO:
+   - File → Add Local Repository
+   - Selecione a pasta: C:\Users\vandr\OneDrive\Área de Trabalho\Revista
+   - Se já estiver aberto, vá para o passo 3
+
+3️⃣ FAZER COMMIT:
+   - Você verá as mudanças em "Changes"
+   - Em "Summary" escreva: "Add endpoint /api/setup"
+   - Clique em "Commit to main"
+   - Clique em "Push origin" (botão azul no topo)
+
+4️⃣ AGUARDAR DEPLOY:
+   - Vá para: https://dashboard.render.com
+   - Clique no seu serviço (futmz)
+   - Veja "Manual Deploy" → Será feito automaticamente
+   - Aguarde ~5 minutos
+
+TEMPO TOTAL: ~10 minutos
+
+═══════════════════════════════════════════════════════════════
+              OPÇÃO 2: VIA GIT BASH (LINHA DE COMANDO)
+═══════════════════════════════════════════════════════════════
+
+1️⃣ ABRIR GIT BASH:
+   - Instale Git se não tiver: https://git-scm.com/
+   - Abra "Git Bash" (não CMD, não PowerShell)
+
+2️⃣ NAVEGAR PARA O PROJETO:
+   cd "/c/Users/vandr/OneDrive/Área de Trabalho/Revista"
+
+3️⃣ ADICIONAR ARQUIVOS:
+   git add backend/main.py
+   git add backend/verificar_artigos.py
+
+4️⃣ FAZER COMMIT:
+   git commit -m "Add endpoint /api/setup"
+
+5️⃣ ENVIAR PARA GITHUB:
+   git push
+
+6️⃣ AGUARDAR DEPLOY:
+   - Render faz deploy automaticamente
+   - Aguarde ~5 minutos
+
+TEMPO TOTAL: ~7 minutos
+
+═══════════════════════════════════════════════════════════════
+              OPÇÃO 3: VIA CMD (SE GIT ESTIVER INSTALADO)
+═══════════════════════════════════════════════════════════════
+
+1️⃣ ABRIR CMD:
+   - Pressione Windows + R
+   - Digite: cmd
+   - Enter
+
+2️⃣ NAVEGAR PARA O PROJETO:
+   cd "C:\Users\vandr\OneDrive\Área de Trabalho\Revista"
+
+3️⃣ EXECUTAR COMANDOS:
+   git add backend/main.py
+   git commit -m "Add endpoint /api/setup"
+   git push
+
+4️⃣ AGUARDAR DEPLOY:
+   Aguarde ~5 minutos para Render fazer deploy
+
+═══════════════════════════════════════════════════════════════
+              ⚠️ SE DER ERRO NO GIT PUSH
+═══════════════════════════════════════════════════════════════
+
+ERRO: "Authentication failed"
+SOLUÇÃO: Precisa autenticar no GitHub
+   → Use GitHub Desktop (mais fácil)
+
+ERRO: "Repository not found"
+SOLUÇÃO: Repositório não existe no GitHub
+   → Crie em: https://github.com/new
+   → Nome: FutMz
+   → Depois adicione remote: git remote add origin https://github.com/SEU_USUARIO/FutMz.git
+
+ERRO: "Permission denied"
+SOLUÇÃO: Você não tem permissão
+   → Use sua própria conta GitHub
+
+═══════════════════════════════════════════════════════════════
+              ✅ VERIFICAR SE FUNCIONOU
+═══════════════════════════════════════════════════════════════
+
+1. Aguarde ~5 minutos após o push
+2. Acesse: https://dashboard.render.com
+3. Veja o serviço "futmz"
+4. Status deve ser "Live" (verde)
+5. Teste: https://futmz.onrender.com/docs
+
+Se aparecer a documentação Swagger = SUCESSO! ✅
+
+═══════════════════════════════════════════════════════════════
+
+                 🎯 RECOMENDAÇÃO
+
+USE GITHUB DESKTOP (Opção 1) - É a mais fácil!
+
+═══════════════════════════════════════════════════════════════
+

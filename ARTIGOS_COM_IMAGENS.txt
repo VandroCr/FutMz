@@ -1,0 +1,64 @@
+═══════════════════════════════════════════════════════════════
+       ✅ ARTIGOS AGORA TEM IMAGENS!
+═══════════════════════════════════════════════════════════════
+
+Atualizei o endpoint /api/setup para incluir imagens nos artigos!
+
+═══════════════════════════════════════════════════════════════
+              📸 IMAGENS DOS ARTIGOS
+═══════════════════════════════════════════════════════════════
+
+Artigo 1: Massificação do Futebol na Zambezia
+   🖼️  https://futmz.onrender.com/uploads/0a710882-1291-44af-aed4-70457ad8a086.jpg
+
+Artigo 2: Maputo Acolhe Workshop de Segurança da CAF
+   🖼️  https://futmz.onrender.com/uploads/0e3195d1-1a71-47f0-9e6c-e5cba25cd413.jpg
+
+Artigo 3: Convocatória Mambas
+   🖼️  https://futmz.onrender.com/uploads/13d9f66c-c013-4984-9086-33c8374c7bee.jpg
+
+═══════════════════════════════════════════════════════════════
+              🔄 ATUALIZAR O RENDER
+═══════════════════════════════════════════════════════════════
+
+FAÇA NOVO DEPLOY para o Render pegar as mudanças:
+
+Execute: ATUALIZAR_RENDER_AGORA.bat
+
+OU manualmente:
+   git add backend/main.py
+   git commit -m "Add images to articles in /api/setup"
+   git push
+
+Aguarde ~5 minutos para deploy terminar
+
+═══════════════════════════════════════════════════════════════
+              📝 IMPORTANTE SOBRE AS IMAGENS
+═══════════════════════════════════════════════════════════════
+
+⚠️ As imagens estão na pasta local backend/uploads/
+   MAS precisam estar no Render também!
+
+Solução: As imagens serão servidas pelo próprio Render
+         se você subir a pasta uploads/ junto com o código.
+
+OU após chamar /api/setup, adicione imagens manualmente
+pela interface web do app.
+
+═══════════════════════════════════════════════════════════════
+              ✅ DEPOIS DO DEPLOY
+═══════════════════════════════════════════════════════════════
+
+1. Chame o endpoint /api/setup novamente
+2. Artigos serão recriados COM imagens
+3. Teste: https://futmz.onrender.com/api/articles
+4. Verifique se cada artigo tem image_url
+
+═══════════════════════════════════════════════════════════════
+
+                 🎯 ATUALIZE O RENDER AGORA!
+
+ATUALIZAR_RENDER_AGORA.bat
+
+═══════════════════════════════════════════════════════════════
+

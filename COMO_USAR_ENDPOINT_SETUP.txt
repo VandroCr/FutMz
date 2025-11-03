@@ -1,0 +1,94 @@
+═══════════════════════════════════════════════════════════════
+       🚀 COMO ATUALIZAR O RENDER E USAR /api/setup
+═══════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════
+              PASSO 1: ATUALIZAR O RENDER
+═══════════════════════════════════════════════════════════════
+
+Execute: ATUALIZAR_RENDER_AGORA.bat (duplo clique)
+
+OU manualmente no terminal:
+
+   git add backend/main.py
+   git commit -m "Add endpoint /api/setup"
+   git push
+
+TEMPO: ~1 minuto
+
+───────────────────────────────────────────────────────────────
+
+AGUARDE ~5 MINUTOS para o Render fazer deploy automaticamente!
+
+Você pode verificar o progresso em:
+   https://dashboard.render.com
+
+═══════════════════════════════════════════════════════════════
+              PASSO 2: CHAMAR O ENDPOINT
+═══════════════════════════════════════════════════════════════
+
+Depois que o deploy terminar:
+
+OPÇÃO A - Via Swagger Docs (RECOMENDADO):
+1. Acesse: https://futmz.onrender.com/docs
+2. Procure por "POST /api/setup"
+3. Clique em "Try it out"
+4. Clique em "Execute"
+5. Veja a resposta com as credenciais!
+
+OPÇÃO B - Via cURL (Terminal):
+   curl -X POST https://futmz.onrender.com/api/setup
+
+OPÇÃO C - Via Postman:
+   - Método: POST
+   - URL: https://futmz.onrender.com/api/setup
+   - Enviar requisição
+
+TEMPO: ~1 minuto
+
+═══════════════════════════════════════════════════════════════
+              ✅ O QUE SERÁ CRIADO
+═══════════════════════════════════════════════════════════════
+
+✅ Admin:
+   Username: admin
+   Email: admin@futmz.com
+   Senha: admin123
+
+✅ 3 Artigos de exemplo:
+   - Massificação do Futebol na Zambezia
+   - Maputo Acolhe Workshop de Segurança da CAF
+   - Convocatória Mambas
+
+═══════════════════════════════════════════════════════════════
+              PASSO 3: TESTAR SE FUNCIONOU
+═══════════════════════════════════════════════════════════════
+
+Teste se os artigos foram criados:
+   https://futmz.onrender.com/api/articles
+
+Deve retornar 3 artigos ao invés de [] ✅
+
+Teste login:
+   https://futmz.onrender.com
+   
+   Username: admin
+   Senha: admin123
+
+═══════════════════════════════════════════════════════════════
+              ⚠️ IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+Se chamar o endpoint mais de uma vez:
+- Se admin já existe → retorna info do admin existente
+- Artigos duplicados → não serão criados novamente
+- Não há problema em chamar múltiplas vezes
+
+═══════════════════════════════════════════════════════════════
+
+                 🎯 EXECUTE AGORA!
+
+ATUALIZAR_RENDER_AGORA.bat
+
+═══════════════════════════════════════════════════════════════
+
