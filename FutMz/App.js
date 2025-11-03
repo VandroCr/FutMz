@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [screen, setScreen] = useState('login'); // 'home', 'login', 'register', 'admin', 'edit', 'article', 'teams'
+  const [screen, setScreen] = useState('home'); // 'home', 'login', 'register', 'admin', 'edit', 'article', 'teams'
   const [articles, setArticles] = useState([]);
   const [featuredArticles, setFeaturedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -83,13 +83,13 @@ export default function App() {
     checkAuth();
   }, [screen]);
 
-  // Verificar autenticação ao carregar o app e redirecionar se já estiver logado
+  // Verificar autenticação ao carregar o app
   useEffect(() => {
     const checkExistingAuth = async () => {
       const token = await getAuthToken();
       if (token) {
-        // Se já tiver token, ir direto para home
-        setScreen('home');
+        setAuthToken(token);
+        // Carregar dados do usuário aqui se necessário
       }
     };
     checkExistingAuth();
@@ -409,18 +409,6 @@ export default function App() {
   };
 
   const openArticle = (article) => {
-    if (!authToken) {
-      Alert.alert(
-        'Login Necessário',
-        'Você precisa fazer login para ler o conteúdo completo dos artigos.',
-        [
-          { text: 'Cancelar', style: 'cancel' },
-          { text: 'Fazer Login', onPress: () => setScreen('login') }
-        ]
-      );
-      return;
-    }
-    
     setSelectedArticle(article);
     setScreen('article');
   };
@@ -1539,25 +1527,31 @@ export default function App() {
         <View style={styles.headerOverlay}>
           <Text style={styles.headerTitle}>Só Futebol</Text>
           <Text style={styles.headerSubtitle}>Futebol Moçambicano</Text>
-          {authToken && (
-            <View style={styles.headerButtons}>
-              {isAdmin && (
-                <>
-                  <TouchableOpacity style={styles.adminButton} onPress={() => setScreen('admin')}>
-                    <Ionicons name="add-circle" size={24} color="#fff" />
-                    <Text style={styles.headerButtonText}> Novo Artigo</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.headerImageButton} onPress={pickHeaderImage}>
-                    <Ionicons name="camera" size={20} color="#fff" />
-                    <Text style={styles.headerButtonText}> Foto</Text>
-                  </TouchableOpacity>
-                </>
-              )}
-              <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                <Text style={styles.headerButtonText}>Sair</Text>
+          <View style={styles.headerButtons}>
+            {authToken ? (
+              <>
+                {isAdmin && (
+                  <>
+                    <TouchableOpacity style={styles.adminButton} onPress={() => setScreen('admin')}>
+                      <Ionicons name="add-circle" size={24} color="#fff" />
+                      <Text style={styles.headerButtonText}> Novo Artigo</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.headerImageButton} onPress={pickHeaderImage}>
+                      <Ionicons name="camera" size={20} color="#fff" />
+                      <Text style={styles.headerButtonText}> Foto</Text>
+                    </TouchableOpacity>
+                  </>
+                )}
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                  <Text style={styles.headerButtonText}>Sair</Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <TouchableOpacity style={styles.logoutButton} onPress={() => setScreen('login')}>
+                <Text style={styles.headerButtonText}>Entrar</Text>
               </TouchableOpacity>
-            </View>
-          )}
+            )}
+          </View>
         </View>
       </View>
 
