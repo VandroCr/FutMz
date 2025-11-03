@@ -1,0 +1,84 @@
+═══════════════════════════════════════════════════════════════
+       🚀 CRIAR ADMIN E ARTIGOS AUTOMATICAMENTE
+═══════════════════════════════════════════════════════════════
+
+✅ Endpoint criado para facilitar a configuração inicial!
+
+═══════════════════════════════════════════════════════════════
+              📝 OPÇÃO 1: USAR O ENDPOINT (RECOMENDADO)
+═══════════════════════════════════════════════════════════════
+
+PRIMEIRO: Atualizar o backend no Render
+
+1. Faça commit e push do backend/main.py para GitHub
+2. O Render vai fazer deploy automaticamente (~5 min)
+3. Depois, chame o endpoint:
+
+───────────────────────────────────────────────────────────────
+
+COMO CHAMAR O ENDPOINT:
+
+Abra o navegador e acesse:
+   https://futmz.onrender.com/docs
+
+1. Procure por "POST /api/setup"
+2. Clique em "Try it out"
+3. Clique em "Execute"
+4. Veja a resposta com as credenciais!
+
+OU use curl no terminal:
+   curl -X POST https://futmz.onrender.com/api/setup
+
+───────────────────────────────────────────────────────────────
+
+O QUE SERÁ CRIADO:
+
+✅ Admin:
+   Username: admin
+   Email: admin@futmz.com
+   Senha: admin123
+
+✅ 3 Artigos de exemplo:
+   - Massificação do Futebol na Zambezia
+   - Maputo Acolhe Workshop de Segurança da CAF
+   - Convocatória Mambas
+
+═══════════════════════════════════════════════════════════════
+              📝 OPÇÃO 2: FAZER MANUALMENTE
+═══════════════════════════════════════════════════════════════
+
+1. Acesse: https://futmz.onrender.com
+2. Clique em "Registrar" ou "Register"
+3. Crie uma conta
+4. Faça login
+5. Crie artigos um por um
+
+═══════════════════════════════════════════════════════════════
+              ⚠️ IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+Depois de criar admin e artigos:
+
+1. Teste se funcionou:
+   https://futmz.onrender.com/api/articles
+
+2. Deve retornar 3 artigos ao invés de []
+
+3. Faça login no app:
+   https://futmz.onrender.com
+   
+4. Teste no celular:
+   Abra Expo Go → Atualize → Artigos devem aparecer!
+
+═══════════════════════════════════════════════════════════════
+
+                 🎯 ATUALIZE O RENDER PRIMEIRO!
+
+git add backend/main.py
+git commit -m "Add: Endpoint /api/setup para criar admin e artigos"
+git push
+
+Aguarde o deploy terminar (~5 min), depois chame o endpoint!
+
+═══════════════════════════════════════════════════════════════
+
