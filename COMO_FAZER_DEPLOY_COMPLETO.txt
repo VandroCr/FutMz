@@ -1,0 +1,112 @@
+═══════════════════════════════════════════════════════════════
+  COMO FAZER DEPLOY COMPLETO - GITHUB + EXPO
+═══════════════════════════════════════════════════════════════
+
+📋 O QUE ESTE DEPLOY FAZ:
+
+1. ✅ Atualiza o código no GitHub
+2. ✅ Render é atualizado automaticamente (via webhook)
+3. ✅ Publica atualização no Expo
+
+═══════════════════════════════════════════════════════════════
+
+🚀 OPÇÃO 1: SCRIPT AUTOMÁTICO (RECOMENDADO)
+
+Execute o script:
+   DEPLOY_COMPLETO.bat
+
+O script faz tudo automaticamente:
+   - Git add, commit e push
+   - Expo update
+
+═══════════════════════════════════════════════════════════════
+
+📝 OPÇÃO 2: MANUAL - PASSO A PASSO
+
+1️⃣  ATUALIZAR GITHUB (Render será atualizado automaticamente):
+
+   git add .
+   git commit -m "Update: Scripts e melhorias"
+   git push
+
+   ⏱️  Aguarde 2-5 minutos para o Render atualizar
+
+2️⃣  PUBLICAR NO EXPO:
+
+   cd FutMz
+   eas update --branch preview --message "Update: Correcoes e melhorias"
+   cd ..
+
+═══════════════════════════════════════════════════════════════
+
+⚠️  PRÉ-REQUISITOS:
+
+✅ Git configurado e conectado ao GitHub
+✅ EAS CLI instalado: npm install -g eas-cli
+✅ Login no EAS: eas login
+✅ Conta Expo configurada
+
+═══════════════════════════════════════════════════════════════
+
+🔧 TROUBLESHOOTING:
+
+❌ Erro: "git não é reconhecido"
+   → Instale o Git: https://git-scm.com/download/win
+   → Ou use GitHub Desktop
+
+❌ Erro: "eas não é reconhecido"
+   → Instale: npm install -g eas-cli
+   → Faça login: eas login
+
+❌ Erro: "não autenticado no EAS"
+   → Execute: eas login
+   → Entre com sua conta Expo
+
+❌ Erro: "Render não atualizou"
+   → Verifique o status no dashboard do Render
+   → Aguarde mais alguns minutos
+   → O deploy no Render pode levar até 5 minutos
+
+═══════════════════════════════════════════════════════════════
+
+📊 VERIFICAR DEPLOY:
+
+1. GitHub:
+   → Acesse seu repositório no GitHub
+   → Verifique se o último commit está lá
+
+2. Render:
+   → Acesse: https://dashboard.render.com
+   → Veja o status do deploy
+   → Teste: https://futmz.onrender.com/api/health
+
+3. Expo:
+   → Abra o app Expo Go no celular
+   → Puxe para baixo para atualizar
+   → Ou force refresh no app
+
+═══════════════════════════════════════════════════════════════
+
+🎯 ORDEM RECOMENDADA:
+
+1. ✅ Exportar dados locais para Render (se necessário):
+   → Execute: EXPORTAR_PARA_RENDER.bat
+
+2. ✅ Fazer deploy completo:
+   → Execute: DEPLOY_COMPLETO.bat
+
+3. ✅ Verificar se tudo funcionou:
+   → Teste no app mobile
+   → Verifique artigos na aba INÍCIO
+
+═══════════════════════════════════════════════════════════════
+
+💡 DICAS:
+
+- Faça commit frequentemente para não perder código
+- Sempre teste localmente antes de fazer deploy
+- Verifique os logs se algo der errado
+- O Render atualiza automaticamente após push no GitHub
+- O Expo precisa de atualização manual via EAS
+
+═══════════════════════════════════════════════════════════════
