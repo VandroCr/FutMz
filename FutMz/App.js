@@ -83,6 +83,13 @@ export default function App() {
     checkAuth();
   }, [screen]);
 
+  // Carregar artigos quando o app inicia (screen inicial é 'home')
+  useEffect(() => {
+    loadArticles();
+    loadFeaturedArticles();
+    loadTeams();
+  }, []);
+
   // Verificar autenticação ao carregar o app
   useEffect(() => {
     const checkExistingAuth = async () => {
@@ -451,13 +458,27 @@ export default function App() {
   const loadArticles = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_URL}/articles?published=true&limit=10`);
+      const response = await fetch(`${API_URL}/articles?published=true&limit=50`);
       if (response.ok) {
         const data = await response.json();
-        setArticles(data);
+        // Normalizar URLs das imagens (concatenar SERVER_URL se for relativa)
+        const normalizedArticles = data.map(article => ({
+          ...article,
+          image_url: article.image_url 
+            ? (article.image_url.startsWith('http') 
+                ? article.image_url 
+                : `${SERVER_URL}${article.image_url}`)
+            : null
+        }));
+        setArticles(normalizedArticles);
+        console.log('Artigos carregados:', normalizedArticles.length);
+      } else {
+        console.error('Erro ao carregar artigos:', response.status, response.statusText);
+        setArticles([]);
       }
     } catch (error) {
       console.error('Erro ao carregar artigos:', error);
+      setArticles([]);
     } finally {
       setLoading(false);
     }
@@ -468,7 +489,17 @@ export default function App() {
       const response = await fetch(`${API_URL}/articles/featured?limit=3`);
       if (response.ok) {
         const data = await response.json();
-        setFeaturedArticles(data);
+        // Normalizar URLs das imagens (concatenar SERVER_URL se for relativa)
+        const normalizedFeatured = data.map(article => ({
+          ...article,
+          image_url: article.image_url 
+            ? (article.image_url.startsWith('http') 
+                ? article.image_url 
+                : `${SERVER_URL}${article.image_url}`)
+            : null
+        }));
+        setFeaturedArticles(normalizedFeatured);
+        console.log('Artigos em destaque carregados:', normalizedFeatured.length);
       }
     } catch (error) {
       console.error('Erro ao carregar artigos em destaque:', error);
