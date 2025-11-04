@@ -1,43 +1,50 @@
 @echo off
-chcp 65001 >nul
-echo.
+chcp 65001 > nul
 echo ═══════════════════════════════════════════════════════════
-echo        PUBLICANDO ATUALIZAÇÃO NO EXPO
+echo    📱 PUBLICAR NO EXPO
 echo ═══════════════════════════════════════════════════════════
 echo.
 
-cd /d "%~dp0FutMz"
+cd /d "%~dp0\FutMz"
 
-if not exist "package.json" (
-    echo [ERRO] Não foi possível navegar para o diretório FutMz
-    pause
-    exit /b 1
-)
-
-echo [INFO] Diretório: %CD%
-echo.
-
-echo [INFO] Publicando atualização no Expo...
-echo.
-
-eas update --branch preview --message "Fix: Forçar uso do Render e artigos com imagens"
-
-if %ERRORLEVEL% NEQ 0 (
+echo Verificando se está logado no Expo...
+call npx expo whoami > nul 2>&1
+if %errorlevel% neq 0 (
     echo.
-    echo [ERRO] Falha ao publicar atualização
-    pause
-    exit /b 1
+    echo ⚠️  Você não está logado no Expo!
+    echo.
+    call npx expo login
+    if %errorlevel% neq 0 (
+        echo.
+        echo ❌ Erro ao fazer login!
+        pause
+        exit /b 1
+    )
 )
 
 echo.
-echo ═══════════════════════════════════════════════════════════
-echo        ✅ ATUALIZAÇÃO PUBLICADA COM SUCESSO!
-echo ═══════════════════════════════════════════════════════════
+echo Publicando atualização no Expo...
 echo.
-echo Próximos passos:
-echo 1. Abra o Expo Go no seu celular
-echo 2. Puxe para baixo para atualizar o app
-echo 3. Os artigos devem aparecer!
+
+call npx eas update --branch production --message "Update: Nova versão do app"
+
+if %errorlevel% neq 0 (
+    echo.
+    echo Tentando método alternativo (expo publish)...
+    call npx expo publish
+)
+
+if %errorlevel% equ 0 (
+    echo.
+    echo ✅ Atualização publicada no Expo!
+    echo.
+    echo 📱 No celular, abra Expo Go e atualize o app
+) else (
+    echo.
+    echo ❌ Erro ao publicar!
+    echo    Tente manualmente: npx eas update
+)
+
 echo.
 pause
 
